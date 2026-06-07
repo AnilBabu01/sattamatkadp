@@ -1,4 +1,4 @@
-/// app/jodi-chart/[slug]/JodiChartClient.tsx
+// app/jodi-chart/[slug]/JodiChartClient.tsx
 
 "use client";
 
@@ -94,303 +94,245 @@ export default function JodiChartClient({ slug }: Props) {
   return (
     <div
       id="top"
-      className="min-h-screen bg-[#060816] text-white overflow-hidden"
+      className="min-h-screen scroll-smooth bg-gradient-to-b from-slate-950 via-slate-900 to-black py-4 text-white"
     >
-      {/* TOP HERO */}
-      <div className="relative border-b border-purple-500/30">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-900/40 via-fuchsia-900/20 to-cyan-900/40" />
-
-        <div className="relative px-3 py-8 md:py-12">
-          <div className="mx-auto max-w-6xl">
-            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_50px_rgba(168,85,247,0.25)]">
-              <div className="p-5 md:p-10 text-center">
-                <div className="inline-flex items-center rounded-full border border-fuchsia-400/40 bg-fuchsia-500/10 px-4 py-1 text-xs md:text-sm font-black tracking-[3px] text-fuchsia-300 uppercase">
-                  Live Jodi Chart
-                </div>
-
-                <h1 className="mt-5 text-3xl sm:text-2xl md:text-2xl font-black uppercase tracking-wide">
-                  <span className="bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-yellow-200 bg-clip-text text-transparent">
-                    {formattedTitle}
-                  </span>
-                </h1>
-
-                <p className="mt-5 max-w-4xl mx-auto text-xs sm:text-sm md:text-base leading-7 text-slate-300 font-medium">
-                  {formattedTitle} chart, {formattedTitle} result satta
-                  chart, {formattedTitle} result matka chart,{" "}
-                  {formattedTitle} jodi chart record, day night{" "}
-                  {formattedTitle} matka chart result,{" "}
-                  {formattedTitle} jodi penal chart, bazar guessing,
-                  dhan express chart ank and live result history.
-                </p>
-
-                {/* LIVE RESULT CARD */}
-                <div className="mt-8 flex justify-center">
-                  <div className="w-full max-w-md rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-[#111827] to-[#0f172a] p-6 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
-                    <div className="text-sm md:text-base font-bold uppercase tracking-[4px] text-cyan-300">
-                      Latest Result
-                    </div>
-
-                    <div className="mt-3 text-2xl md:text-2xl font-black tracking-[6px] text-white">
-                      <span className="bg-gradient-to-r from-yellow-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
-                        {latestResult}
-                      </span>
-                    </div>
-
-                    <button
-                      onClick={fetchChartData}
-                      className="mt-6 w-full rounded-2xl bg-gradient-to-r from-fuchsia-600 via-violet-600 to-cyan-600 px-5 py-3 text-sm md:text-lg font-black uppercase tracking-wide text-white transition duration-300 hover:scale-[1.02]"
-                    >
-                      {loading ? "Refreshing..." : "Refresh Result"}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* FILTER SECTION */}
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-cyan-400/20 bg-[#0f172a]/90 p-5 shadow-lg">
-                <div className="text-cyan-300 text-sm font-black uppercase tracking-[2px] mb-3">
-                  From Date
-                </div>
-
-                <input
-                  type="date"
-                  value={fromDate}
-                  onChange={(e) => setFromDate(e.target.value)}
-                  className="w-full rounded-xl border border-cyan-500/30 bg-[#111827] px-4 py-3 text-white outline-none focus:border-cyan-400"
-                />
-              </div>
-
-              <div className="rounded-2xl border border-fuchsia-400/20 bg-[#0f172a]/90 p-5 shadow-lg">
-                <div className="text-fuchsia-300 text-sm font-black uppercase tracking-[2px] mb-3">
-                  To Date
-                </div>
-
-                <input
-                  type="date"
-                  value={toDate}
-                  onChange={(e) => setToDate(e.target.value)}
-                  className="w-full rounded-xl border border-fuchsia-500/30 bg-[#111827] px-4 py-3 text-white outline-none focus:border-fuchsia-400"
-                />
-              </div>
-            </div>
-
-            {/* NAV BUTTONS */}
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="#chartSection"
-                className="rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 text-sm md:text-base font-black uppercase tracking-wide text-white shadow-lg transition hover:scale-105"
-              >
-                View Chart
-              </a>
-
-              <a
-                href="#bottom"
-                className="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 px-5 py-3 text-sm md:text-base font-black uppercase tracking-wide text-fuchsia-300 transition hover:scale-105"
-              >
-                Go Bottom
-              </a>
-            </div>
+      <div className="px-2">
+        {/* Header */}
+        <div className="overflow-hidden border-2 border-cyan-500 shadow-lg shadow-cyan-500/20 rounded-lg">
+          <div className="bg-gradient-to-r from-cyan-700 to-blue-900 py-4 text-center">
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-black italic uppercase text-cyan-300 tracking-wide">
+              {formattedTitle}
+            </h1>
           </div>
-        </div>
-      </div>
 
-      {/* CHART SECTION */}
-      <div
-        id="chartSection"
-        className="px-2 py-6 md:py-10"
-      >
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-5 text-center">
-            <h2 className="text-2xl md:text-4xl font-black uppercase">
-              <span className="bg-gradient-to-r from-cyan-300 to-fuchsia-300 bg-clip-text text-transparent">
-                {formattedTitle} Chart
-              </span>
+          <div className="border-t-2 border-pink-500 bg-slate-900 py-4 text-center">
+            <h2 className="text-lg sm:text-xl md:text-3xl font-black italic text-pink-400">
+              {formattedTitle}
             </h2>
 
-            <div className="mt-2 text-slate-400 text-sm md:text-base font-semibold">
-              Weekly & Daily Result History
-            </div>
-          </div>
-
-          {/* KEEPING CHART VIEW SAME */}
-          <div className="overflow-x-auto">
-            <div className="flex justify-center">
-              <div className="rounded-3xl border border-cyan-500/30 bg-[#0f172a] p-3 shadow-[0_0_40px_rgba(34,211,238,0.15)]">
-                <table className="border-collapse">
-                  <tbody>
-                    {chartData.length > 0 ? (
-                      chartData.map((row, rowIndex) => (
-                        <tr key={rowIndex}>
-                          {row.map((num, colIndex) => (
-                            <td
-                              key={colIndex}
-                              className={`h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 border border-slate-700 text-center text-lg sm:text-xl md:text-2xl font-black italic ${
-                                redNumbers.includes(num)
-                                  ? "text-pink-400"
-                                  : "text-white"
-                              }`}
-                              style={{
-                                fontFamily: "Georgia, serif",
-                                textShadow:
-                                  "0px 0px 10px rgba(34,211,238,0.7)",
-                              }}
-                            >
-                              {typeof num === "string" && num.includes("-")
-                                ? num.split("-")[1]
-                                : num}
-                            </td>
-                          ))}
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td
-                          colSpan={7}
-                          className="py-10 text-center text-cyan-300 font-bold"
-                        >
-                          {loading
-                            ? "Loading Chart..."
-                            : "No Data Found"}
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          {/* RESULT FOOTER CARD */}
-          <div className="mt-8 rounded-3xl border border-fuchsia-500/20 bg-gradient-to-br from-[#111827] to-[#0f172a] p-6 text-center shadow-[0_0_40px_rgba(217,70,239,0.2)]">
-            <div className="text-sm md:text-lg font-black uppercase tracking-[4px] text-fuchsia-300">
-              Current Live Result
-            </div>
-
-            <div className="mt-3 text-4xl md:text-2xl font-black text-white tracking-[5px]">
-              {latestResult}
-            </div>
-
-            <button
-              onClick={fetchChartData}
-              className="mt-5 rounded-2xl bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 px-6 py-3 text-sm md:text-lg font-black uppercase tracking-wide text-white transition hover:scale-105"
-            >
-              {loading ? "Refreshing..." : "Refresh Result"}
-            </button>
+            <p className="mt-2 px-3 text-[11px] sm:text-xs md:text-sm font-semibold italic text-slate-300 leading-relaxed lowercase">
+              {formattedTitle} chart, {formattedTitle} result satta chart,{" "}
+              {formattedTitle} result matka chart, {formattedTitle} jodi chart
+              record, day night {formattedTitle} matka chart result,{" "}
+              {formattedTitle} jodi penal chart, {formattedTitle} bazar
+              guessing, dhan express chart ank, satta matka {formattedTitle},
+              results of dhan express, {formattedTitle} satta matka,{" "}
+              {formattedTitle} chart dpboss
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* WHATSAPP BANNER */}
-      <div className="px-2">
-        <div className="mx-auto max-w-5xl rounded-3xl border border-green-500/20 bg-gradient-to-r from-green-600 to-emerald-700 px-5 py-5 text-center shadow-2xl">
-          <div className="text-lg md:text-2xl font-black uppercase tracking-wide text-white">
-            Join WhatsApp Channel For Fast Result
-          </div>
-
-          <div className="mt-2 text-sm md:text-base text-green-100 font-semibold">
-            Get Instant Market Updates & Live Result Notification
-          </div>
-        </div>
-      </div>
-
-      {/* NAVIGATION */}
-      <div className="px-2 mt-6">
-        <div className="mx-auto max-w-6xl rounded-3xl border border-white/10 bg-[#0f172a] p-5">
-          <div className="flex flex-wrap justify-center gap-3 text-xs sm:text-sm md:text-base font-black uppercase">
-            <Link
-              href="/"
-              className="rounded-xl bg-cyan-500/10 px-4 py-2 text-cyan-300 hover:bg-cyan-500/20"
-            >
-              Home
-            </Link>
-
-            <Link
-              href="/satta-matka-guessing-forum"
-              className="rounded-xl bg-fuchsia-500/10 px-4 py-2 text-fuchsia-300 hover:bg-fuchsia-500/20"
-            >
-              Guessing
-            </Link>
-
-            <Link
-              href="/satta-matka-chart"
-              className="rounded-xl bg-yellow-500/10 px-4 py-2 text-yellow-300 hover:bg-yellow-500/20"
-            >
-              Charts
-            </Link>
-
-            <Link
-              href="/online-matka-play"
-              className="rounded-xl bg-blue-500/10 px-4 py-2 text-blue-300 hover:bg-blue-500/20"
-            >
-              Play
-            </Link>
-
-            <Link
-              href="/tara-matka-mumbai"
-              className="rounded-xl bg-green-500/10 px-4 py-2 text-green-300 hover:bg-green-500/20"
-            >
-              Tara Matka
-            </Link>
-
-            <Link
-              href="/fix-matka-number"
-              className="rounded-xl bg-orange-500/10 px-4 py-2 text-orange-300 hover:bg-orange-500/20"
-            >
-              Fix Number
-            </Link>
-
-            <Link
-              href="/sitemap.xml"
-              className="rounded-xl bg-red-500/10 px-4 py-2 text-red-300 hover:bg-red-500/20"
-            >
-              Sitemap
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* FOOTER */}
-      <div
-        id="bottom"
-        className="px-2 py-6"
-      >
-        <div className="mx-auto max-w-6xl rounded-3xl border border-cyan-500/20 bg-gradient-to-br from-[#111827] to-black p-8 text-center shadow-[0_0_40px_rgba(34,211,238,0.15)]">
-          <h2 className="text-2xl md:text-4xl font-black uppercase">
-            <span className="bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-yellow-300 bg-clip-text text-transparent">
-              SATTAMATKADPBOS
-            </span>
+        {/* Result Section */}
+        <div className="mt-3 border-2 border-cyan-500 bg-slate-900 py-5 text-center rounded-lg">
+          <h2 className="text-lg md:text-2xl font-black uppercase text-cyan-300">
+            {formattedTitle}
           </h2>
 
-          <div className="mt-5 text-sm md:text-lg font-bold tracking-wide text-slate-300">
-            ALL RIGHTS RESERVED (2012-2026)
+          <div className="mt-2 text-3xl md:text-5xl font-black text-pink-400 tracking-wider">
+            {latestResult}
           </div>
 
-          <div className="mt-5 text-base md:text-xl font-black text-white">
-            SITE OWNER
-          </div>
+          <button
+            onClick={fetchChartData}
+            className="mt-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 px-5 py-2 text-sm md:text-xl font-black italic text-white shadow-xl hover:scale-105 transition"
+          >
+            {loading ? "Refreshing..." : "Refresh Result"}
+          </button>
+        </div>
 
-          <div className="mt-2 text-xl md:text-3xl font-black text-fuchsia-400">
-            FAST BOSS SIR
-          </div>
+        {/* DATE FILTER SECTION */}
+        <div className="mt-4 border-2 border-pink-500 bg-slate-900 rounded-xl p-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            {/* FROM DATE */}
+            <div className="flex flex-col w-full md:w-auto">
+              <label className="mb-1 text-cyan-300 font-bold text-sm">
+                From Date
+              </label>
 
-          <div className="mt-3 text-lg md:text-2xl font-black text-cyan-300">
-            1234567890
-          </div>
+              <input
+                type="date"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+                className="bg-slate-800 border border-cyan-500 rounded-lg px-4 py-2 text-white outline-none"
+              />
+            </div>
 
-          <div className="mt-5 text-xs md:text-base break-all text-slate-500">
-            https://sattamatkadpbos.com
-          </div>
+            {/* TO DATE */}
+            <div className="flex flex-col w-full md:w-auto">
+              <label className="mb-1 text-pink-400 font-bold text-sm">
+                To Date
+              </label>
 
-          <div className="mt-6 flex justify-center">
-            <a
-              href="#top"
-              className="rounded-2xl bg-gradient-to-r from-cyan-500 to-fuchsia-600 px-6 py-3 text-sm md:text-base font-black uppercase tracking-wide text-white transition hover:scale-105"
-            >
-              Back To Top
-            </a>
+              <input
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+                className="bg-slate-800 border border-pink-500 rounded-lg px-4 py-2 text-white outline-none"
+              />
+            </div>
           </div>
+        </div>
+
+        {/* Go Bottom Button */}
+        <div className="my-4 flex justify-center">
+          <a
+            href="#bottom"
+            className="rounded-lg border border-cyan-400 bg-slate-900 px-4 py-2 text-sm md:text-lg font-bold italic text-cyan-300 shadow-lg transition hover:bg-slate-800 hover:scale-105"
+          >
+            Go to Bottom
+          </a>
+        </div>
+
+        {/* Chart Table */}
+        <div className="overflow-x-auto">
+          <div className="flex justify-center">
+            <div className="border-2 border-cyan-500 bg-slate-900 p-2 shadow-2xl rounded-xl">
+              <table className="border-collapse">
+                <tbody>
+                  {chartData.length > 0 ? (
+                    chartData.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        {row.map((num, colIndex) => (
+                          <td
+                            key={colIndex}
+                            className={`h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 border border-slate-700 text-center text-lg sm:text-xl md:text-2xl font-black italic ${
+                              redNumbers.includes(num)
+                                ? "text-pink-400"
+                                : "text-white"
+                            }`}
+                            style={{
+                              fontFamily: "Georgia, serif",
+                              textShadow: "0px 0px 10px rgba(34,211,238,0.7)",
+                            }}
+                          >
+                            {typeof num === "string" && num.includes("-")
+                              ? num.split("-")[1]
+                              : num}
+                          </td>
+                        ))}
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan={7}
+                        className="text-center py-10 text-cyan-300 font-bold"
+                      >
+                        {loading ? "Loading Chart..." : "No Data Found"}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Button */}
+        <div id="bottom" className="my-4 flex justify-center">
+          <a
+            href="#top"
+            className="rounded-lg border border-pink-400 bg-slate-900 px-4 py-2 text-sm md:text-lg font-bold italic text-pink-400 shadow-lg transition hover:bg-slate-800 hover:scale-105"
+          >
+            Go to Top
+          </a>
+        </div>
+      </div>
+
+      {/* Footer Result */}
+      <div className="mx-2 border-2 border-cyan-500 bg-slate-900 text-center py-4 rounded-xl">
+        <h1 className="text-cyan-300 text-lg md:text-2xl font-black uppercase tracking-wide">
+          {formattedTitle}
+        </h1>
+
+        <div className="mt-2 text-2xl md:text-4xl font-black text-pink-400">
+          {latestResult}
+        </div>
+
+        <button
+          onClick={fetchChartData}
+          className="mt-3 px-5 py-2 bg-gradient-to-r from-pink-500 to-cyan-500 rounded-full text-white font-black shadow-lg hover:scale-105 transition"
+        >
+          {loading ? "Refreshing..." : "Refresh Result"}
+        </button>
+      </div>
+
+      {/* Whatsapp Banner */}
+      <div className="flex justify-center mt-4 px-2">
+        <div className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center">
+          Join our WhatsApp channel for fast Result
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="bg-slate-900 border border-cyan-500 mt-5 py-4 mx-2 rounded-xl">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 text-xs sm:text-sm md:text-lg font-bold">
+          <Link href="/" className="text-cyan-400">
+            Home
+          </Link>
+
+          {" | "}
+
+          <Link href="/satta-matka-guessing-forum" className="text-pink-400">
+            Matka Guessing
+          </Link>
+
+          {" | "}
+
+          <Link href="/satta-matka-chart" className="text-yellow-400">
+            Matka Chart
+          </Link>
+
+          {" | "}
+
+          <Link href="/online-matka-play" className="text-blue-400">
+            Matka Play
+          </Link>
+
+          {" | "}
+
+          <Link href="/tara-matka-mumbai" className="text-green-400">
+            Tara Matka
+          </Link>
+
+          {" | "}
+
+          <Link href="/fix-matka-number" className="text-orange-400">
+            Fix Matka
+          </Link>
+
+          {" | "}
+
+          <Link href="/sitemap.xml" className="text-orange-400">
+            Sitemap
+          </Link>
+        </div>
+      </div>
+
+      {/* Main Footer */}
+      <div className="bg-slate-900 border border-cyan-500 text-center py-5 mt-4 mx-2 rounded-xl shadow-lg">
+        <h2 className="text-pink-400 text-lg md:text-2xl font-black italic">
+          sattamatkadpbos
+        </h2>
+
+        <div className="mt-3 text-sm md:text-lg font-black text-cyan-300">
+          ALL RIGHTS RESERVED (2012-2026)
+        </div>
+
+        <div className="mt-2 text-sm md:text-lg font-black text-white">
+          SITE OWNER:-
+        </div>
+
+        <div className="mt-2 text-sm md:text-xl font-black underline text-pink-400">
+          FAST BOSS SIR
+        </div>
+
+        <div className="mt-2 text-cyan-300 text-sm md:text-xl font-black">
+          1234567890
+        </div>
+
+        <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">
+          https://sattamatkadpbos.com
         </div>
       </div>
     </div>

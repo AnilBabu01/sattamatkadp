@@ -22,164 +22,77 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#060816] text-white overflow-hidden">
-      {/* TOP HERO */}
-      <div className="relative border-b-4 border-yellow-400">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#ff512f] via-[#dd2476] to-[#1e3c72] opacity-20" />
-
-        <div className="relative max-w-7xl mx-auto px-4 py-10">
-          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
-            {/* Header */}
-            <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 p-6 text-center">
-              <h1 className="text-4xl md:text-6xl font-black tracking-wider text-black drop-shadow-lg">
-                SATTA MATKA FORUM
-              </h1>
-
-              <p className="mt-3 text-black font-extrabold text-lg">
-                India's Premium Guessing Community
-              </p>
-            </div>
-
-            {/* Description */}
-            <div className="p-6 md:p-8 bg-[#0f172a]">
-              <h2 className="text-center text-3xl md:text-4xl font-black text-yellow-400">
-                Daily Guessing Zone
-              </h2>
-
-              <p className="mt-5 text-center text-slate-300 leading-8 text-[16px] md:text-lg font-medium">
-                Welcome Back To India's Best Matka Guessing Forum, Get
-                Kalyan Guessing Free With Our Satta Matka Guessing Experts.
-                Also Get Help In Milan Day, Milan Night, Rajdhani Day/Night
-                And Other Matka Games Related To Madhur Matka and Indian
-                Matka In Satta Matka Guessing 143 Forum.
-              </p>
-
-              {/* Menu Buttons */}
-              <div className="grid md:grid-cols-3 gap-4 mt-8">
-                {[
-                  "GO TO HOME",
-                  "100% DATE FIX ANK",
-                  "FREE FORUM CLICK HERE",
-                ].map((item) => (
-                  <button
-                    key={item}
-                    className="
-                      relative overflow-hidden rounded-2xl
-                      bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600
-                      text-black font-black py-4 text-lg
-                      hover:scale-[0.98] duration-300 shadow-xl
-                    "
-                  >
-                    <span className="relative z-10">{item}</span>
-
-                    <div className="absolute inset-0 bg-white/20 translate-y-full hover:translate-y-0 duration-300" />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-purple-950 to-black text-white">
+      {/* Top Container */}
+      <div className="border-2 border-cyan-500 shadow-[0_0_20px_#06b6d4]">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-700 py-5 text-center">
+          <h1 className="text-5xl font-black italic tracking-wide text-white drop-shadow-lg">
+            Guessing Forum
+          </h1>
         </div>
-      </div>
 
-      {/* RULES SECTION */}
-      <div className="max-w-7xl mx-auto px-4 mt-8">
-        <div className="bg-[#0f172a] rounded-3xl border border-yellow-500/30 overflow-hidden shadow-2xl">
-          <div className="bg-gradient-to-r from-yellow-500 to-orange-600 py-4 text-center">
-            <h2 className="text-3xl font-black text-black">
-              FORUM RULES
-            </h2>
-          </div>
+        {/* Title Section */}
+        <div className="bg-slate-900 border-y-2 border-cyan-500 text-center p-5">
+          <h2 className="text-4xl font-black text-cyan-400 mb-3">
+            Matka Guessing
+          </h2>
 
-          <div className="divide-y divide-slate-700">
-            {rules.map((rule, index) => (
-              <div
-                key={index}
-                className="
-                  flex items-center gap-4 px-5 py-5
-                  hover:bg-slate-800/50 duration-200
-                "
+          <p className="font-semibold text-lg text-slate-200 leading-8">
+            Welcome Back To India's Best Matka Guessing Forum, Get Kalyan
+            Guessing Free With Our Satta Matka Guessing Experts. Also Get Help
+            In Milan Day, Milan Night, Rajdhani day/Night And Other Matka Games
+            Related To Madhur Matka and Indian Matka In Satta Matka Guessing 143
+            Forum.
+          </p>
+        </div>
+
+        {/* Menu Buttons */}
+        <div className="grid md:grid-cols-3 gap-[2px] bg-cyan-500">
+          {["GO TO HOME", "100% DATE FIX ANK", "FREE FORUM CLICK HERE"].map(
+            (item) => (
+              <button
+                key={item}
+                className="bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-600
+                hover:scale-95 duration-200 text-white font-black py-4 text-lg"
               >
-                <div
-                  className="
-                    min-w-[42px] h-[42px]
-                    rounded-full
-                    bg-gradient-to-br from-yellow-400 to-orange-600
-                    flex items-center justify-center
-                    font-black text-black
-                  "
-                >
-                  {index + 1}
-                </div>
-
-                <p className="font-bold text-slate-200 text-[15px] md:text-[16px]">
-                  {rule}
-                </p>
-              </div>
-            ))}
-          </div>
+                {item}
+              </button>
+            ),
+          )}
         </div>
-      </div>
 
-      {/* POST BOX */}
-      <div className="max-w-7xl mx-auto px-4 mt-8">
-        <div
-          className="
-            bg-gradient-to-br from-[#111827] via-[#0f172a] to-[#1e293b]
-            rounded-3xl border border-orange-500/30
-            p-8 shadow-2xl
-          "
-        >
-          <div className="flex flex-col items-center">
-            <div className="mb-5 text-center">
-              <h2 className="text-3xl font-black text-yellow-400">
-                Post Your Guess
-              </h2>
-
-              <p className="text-slate-400 mt-2">
-                Share your daily guessing and market ideas
-              </p>
+        {/* Rules Section */}
+        <div className="bg-slate-950 border border-cyan-500">
+          {rules.map((rule, index) => (
+            <div
+              key={index}
+              className="border-b border-cyan-700 py-3 text-center text-[15px] font-bold text-slate-200"
+            >
+              <span className="text-pink-500 mr-2">{index + 1} »</span>
+              {rule}
             </div>
+          ))}
+        </div>
+
+        {/* Post Box */}
+        <div className="bg-gradient-to-r from-purple-900 via-slate-900 to-cyan-900 p-8 border-t-4 border-cyan-500">
+          <div className="flex flex-col items-center">
+            <label className="text-2xl text-cyan-300 font-bold mb-3">
+              Text :
+            </label>
 
             <textarea
-              className="
-                w-full max-w-2xl h-40
-                bg-black/40
-                border-2 border-orange-500/40
-                rounded-2xl p-5
-                text-white font-semibold
-                outline-none
-                focus:border-yellow-400
-                focus:ring-4 focus:ring-yellow-500/20
-              "
+              className="w-72 h-28 bg-slate-950 text-white border-2 border-cyan-500 rounded-lg p-3 outline-none focus:ring-2 focus:ring-pink-500"
               placeholder="Write your message..."
             />
 
-            <div className="mt-6 flex flex-wrap justify-center gap-4">
-              <button
-                className="
-                  bg-gradient-to-r from-yellow-400 to-orange-500
-                  text-black
-                  font-black
-                  px-8 py-3
-                  rounded-2xl
-                  shadow-xl
-                  hover:scale-95 duration-200
-                "
-              >
+            <div className="mt-4 flex gap-3">
+              <button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 px-5 py-2 rounded-lg font-bold text-white shadow-lg">
                 Submit
               </button>
 
-              <button
-                className="
-                  bg-gradient-to-r from-pink-500 to-red-600
-                  text-white
-                  font-black
-                  px-8 py-3
-                  rounded-2xl
-                  shadow-xl
-                  hover:scale-95 duration-200
-                "
-              >
+              <button className="bg-gradient-to-r from-pink-600 to-purple-700 hover:opacity-90 px-5 py-2 rounded-lg font-bold text-white shadow-lg">
                 Refresh Forum
               </button>
             </div>
@@ -187,201 +100,93 @@ export default function Page() {
         </div>
       </div>
 
-      {/* STATUS BAR */}
-      <div className="max-w-7xl mx-auto px-4 mt-8">
-        <div
-          className="
-            bg-gradient-to-r from-[#1f2937] via-[#111827] to-[#1f2937]
-            border border-yellow-500/30
-            rounded-2xl
-            px-5 py-4
-            flex flex-col md:flex-row
-            items-center justify-between
-            gap-4
-          "
-        >
-          <div className="text-center md:text-left">
-            <div className="text-yellow-400 font-black text-lg">
-              RUDRA PENAL KING
-            </div>
-
-            <div className="text-slate-400 font-semibold text-sm">
-              30 May 08:10:44 pm
-            </div>
+      {/* Top Header */}
+      <div className="bg-gradient-to-r from-pink-700 via-purple-700 to-cyan-700 text-white border-y-2 border-cyan-400 mt-6">
+        <div className="flex justify-between px-4 py-3 text-sm font-black">
+          <div>
+            <div className="text-cyan-300">RUDRA PENAL KING</div>
+            <div className="text-slate-200">30 May 08:10:44 pm</div>
           </div>
 
-          <div
-            className="
-              bg-gradient-to-r from-yellow-400 to-orange-500
-              text-black
-              px-6 py-2
-              rounded-full
-              font-black
-              animate-pulse
-            "
-          >
-            TOP GUESSER
+          <div className="text-yellow-300 text-center text-lg animate-pulse">
+            Top Guesser
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-green-400 animate-ping" />
-
-            <span className="text-green-400 font-black">
-              ONLINE
-            </span>
-          </div>
+          <div className="text-green-300">[Online]</div>
         </div>
       </div>
 
-      {/* PAGE TITLE */}
-      <div className="max-w-7xl mx-auto px-4 pt-12 pb-4 text-center">
-        <h1
-          className="
-            text-4xl md:text-6xl
-            font-black
-            bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500
-            bg-clip-text text-transparent
-            drop-shadow-2xl
-          "
-        >
-          SATTA MATKA GUESSING FORUM
-        </h1>
+      {/* Main Container */}
+      <div className="max-w-7xl mx-auto p-4">
+        {/* Banner */}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl md:text-5xl font-black text-pink-500 drop-shadow-lg animate-pulse">
+            🔥 SATTA MATKA GUESSING FORUM 🔥
+          </h1>
 
-        <p className="mt-5 inline-block bg-yellow-400 text-black px-6 py-2 rounded-full font-black text-lg">
-          DATE : 30_05_2026
-        </p>
-      </div>
+          <p className="text-xl font-bold mt-4 text-cyan-300">
+            DATE: 30_05_2026
+          </p>
+        </div>
 
-      {/* CARDS */}
-      <div className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+        {/* Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {topGuessers2.map((guesser) => (
             <div
               key={guesser.id}
-              className="
-                relative overflow-hidden rounded-3xl
-                bg-gradient-to-br from-[#111827] to-[#0f172a]
-                border border-orange-500/30
-                shadow-[0_15px_40px_rgba(0,0,0,0.5)]
-                hover:-translate-y-1 duration-300
-              "
+              className="bg-slate-900 border-2 border-cyan-500 rounded-2xl shadow-[0_0_15px_#06b6d4] overflow-hidden hover:-translate-y-1 duration-300"
             >
-              {/* Glow */}
-              <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-orange-500/20 blur-3xl" />
-
-              {/* Header */}
-              <div
-                className="
-                  relative
-                  bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600
-                  p-5 text-center
-                "
-              >
-                <h2 className="text-3xl font-black text-black tracking-wide">
+              {/* Card Header */}
+              <div className="bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-700 text-white p-4 text-center">
+                <h2 className="text-2xl font-black tracking-wide">
                   {guesser.name}
                 </h2>
               </div>
 
-              {/* Body */}
-              <div className="relative p-6">
-                {/* Date & Phone */}
-                <div className="flex flex-col gap-4">
-                  <div className="bg-black/30 rounded-2xl p-4 border border-white/5">
-                    <p className="text-slate-400 text-sm font-bold">
-                      DATE
-                    </p>
+              {/* Card Body */}
+              <div className="p-5 text-center">
+                <p className="font-bold text-pink-400 text-lg">
+                  📅 {guesser.date}
+                </p>
 
-                    <p className="text-yellow-400 text-xl font-black mt-1">
-                      {guesser.date}
-                    </p>
-                  </div>
+                <p className="font-bold text-cyan-300 mt-3 text-lg">
+                  📱 {guesser.phone}
+                </p>
 
-                  <div className="bg-black/30 rounded-2xl p-4 border border-white/5">
-                    <p className="text-slate-400 text-sm font-bold">
-                      CONTACT
-                    </p>
-
-                    <p className="text-green-400 text-xl font-black mt-1">
-                      {guesser.phone}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Offer Box */}
-                <div
-                  className="
-                    mt-6
-                    bg-gradient-to-r from-orange-500/20 to-red-500/20
-                    border border-orange-500/30
-                    rounded-2xl
-                    p-5 text-center
-                  "
-                >
-                  <p className="text-2xl font-black text-yellow-400">
+                <div className="my-5 bg-slate-950 border border-cyan-500 rounded-xl p-3">
+                  <p className="font-black text-green-400 text-lg">
                     Ek Mauka Badlega Aapki Zindagi
                   </p>
 
-                  <p className="text-slate-300 mt-2 font-semibold">
+                  <p className="text-sm text-slate-300 mt-1">
                     Guaranty Fix Office Se Game Milega
                   </p>
                 </div>
 
                 {/* Games */}
-                <div className="mt-7">
-                  <h3 className="text-2xl font-black text-orange-400 text-center">
+                <div className="border-t border-cyan-700 pt-4">
+                  <h3 className="font-black text-pink-500 text-xl">
                     Active Games
                   </h3>
 
-                  <div className="grid grid-cols-1 gap-3 mt-5">
+                  <ul className="mt-3 space-y-2">
                     {guesser.games.map((game, index) => (
-                      <div
+                      <li
                         key={index}
-                        className="
-                          bg-black/30
-                          border border-orange-500/20
-                          rounded-2xl
-                          py-3 px-4
-                          font-bold text-slate-200
-                          hover:border-yellow-400/50
-                          duration-200
-                        "
+                        className="font-bold text-cyan-300 bg-slate-950 border border-cyan-700 rounded-lg py-2"
                       >
                         🎯 {game}
-                      </div>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
 
                 {/* Footer */}
-                <div
-                  className="
-                    mt-7
-                    bg-gradient-to-r from-yellow-400 to-orange-500
-                    text-black
-                    text-center
-                    py-4
-                    rounded-2xl
-                    font-black text-lg
-                    shadow-lg
-                  "
-                >
+                <div className="mt-5 bg-gradient-to-r from-pink-600 to-purple-700 p-3 rounded-lg font-black text-white">
                   Paisa Aapka Vishwas Hamara
                 </div>
 
-                {/* Button */}
-                <button
-                  className="
-                    w-full mt-6
-                    bg-gradient-to-r from-red-500 to-pink-600
-                    text-white
-                    py-4
-                    rounded-2xl
-                    font-black text-lg
-                    shadow-xl
-                    hover:scale-[0.98]
-                    duration-200
-                  "
-                >
+                <button className="mt-5 bg-gradient-to-r from-cyan-500 to-blue-700 hover:scale-95 duration-200 text-white px-6 py-3 rounded-xl font-black shadow-lg">
                   Contact Now
                 </button>
               </div>

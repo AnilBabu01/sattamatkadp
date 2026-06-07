@@ -16,7 +16,7 @@ type ApiItem = {
   id: number;
   name: string;
   result: string;
-  date: string;
+  date: string; // 06-06-2026
 };
 
 type WeeklyRow = {
@@ -36,18 +36,38 @@ export async function generateStaticParams() {
    MINI DIGITS
 ========================================================= */
 function MiniDigits({ value }: { value: string }) {
+  console.log("from MiniDigits =", value);
+
+  /*
+    POSSIBLE VALUES
+
+    224-8
+    224-8-205
+    ""
+  */
+
+  // DEFAULT
   let left = ["-", "-", "-"];
   let right = ["-", "-", "-"];
 
   if (value) {
     const parts = value.split("-");
 
+    /*
+      224-8
+      LEFT = 224
+    */
     if (parts.length === 2) {
       const first = parts[0] || "";
 
       left = [first[0] || "-", first[1] || "-", first[2] || "-"];
     }
 
+    /*
+      224-8-205
+      LEFT = 224
+      RIGHT = 205
+    */
     if (parts.length >= 3) {
       const first = parts[0] || "";
       const last = parts[2] || "";
@@ -59,25 +79,30 @@ function MiniDigits({ value }: { value: string }) {
   }
 
   return (
-    <div className="absolute inset-0 pointer-events-none flex flex-col justify-between text-[9px] sm:text-[10px] md:text-[11px] font-bold leading-none text-amber-300/70">
+    <div className="absolute inset-0 pointer-events-none flex flex-col justify-between text-[9px] sm:text-[10px] md:text-[11px] font-extrabold leading-none text-cyan-300">
+      {/* ROW 1 */}
       <div className="flex justify-between p-[1px]">
         <span>{left[0]}</span>
+
         <span>{right[0]}</span>
       </div>
 
+      {/* ROW 2 */}
       <div className="flex justify-between p-[1px]">
         <span>{left[1]}</span>
+
         <span>{right[1]}</span>
       </div>
 
+      {/* ROW 3 */}
       <div className="flex justify-between p-[1px]">
         <span>{left[2]}</span>
+
         <span>{right[2]}</span>
       </div>
     </div>
   );
 }
-
 /* =========================================================
    DATE HELPERS
 ========================================================= */
@@ -91,6 +116,7 @@ function formatDate(date: Date) {
 }
 
 function apiDateToObj(dateStr: string) {
+  // 06-06-2026
   const [dd, mm, yyyy] = dateStr.split("-");
 
   return new Date(Number(yyyy), Number(mm) - 1, Number(dd));
@@ -99,7 +125,7 @@ function apiDateToObj(dateStr: string) {
 function getMonday(date: Date) {
   const d = new Date(date);
 
-  const day = d.getDay();
+  const day = d.getDay(); // 0 sunday
 
   const diff = day === 0 ? -6 : 1 - day;
 
@@ -116,6 +142,7 @@ function getWeekKey(start: Date, end: Date) {
 
 /* =========================================================
    RESULT -> JODI
+   467-71-344 => 71
 ========================================================= */
 
 function getJodi(result: string) {
@@ -129,15 +156,22 @@ function getJodi(result: string) {
 /* =========================================================
    PANEL LOGIC
 ========================================================= */
-
 function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
   if (!data || data.length === 0) return [];
 
+  /* =====================================================
+     SORT DATE
+  ===================================================== */
   const sorted = [...data].sort((a, b) => {
     return apiDateToObj(a.date).getTime() - apiDateToObj(b.date).getTime();
   });
 
+  /* =====================================================
+     DATE => FULL RESULT
+     DATE => JODI
+  ===================================================== */
   const resultMap: Record<string, string> = {};
+
   const jodiMap: Record<string, string> = {};
 
   sorted.forEach((item) => {
@@ -145,15 +179,23 @@ function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
 
     const key = formatDate(dateObj);
 
+    // FULL RESULT
     resultMap[key] = item.result || "";
 
+    // JODI
     jodiMap[key] = getJodi(item.result);
   });
 
+  /* =====================================================
+     FIRST + LAST DATE
+  ===================================================== */
   const firstDate = apiDateToObj(sorted[0].date);
 
   const lastDate = apiDateToObj(sorted[sorted.length - 1].date);
 
+  /* =====================================================
+     START FROM MONDAY
+  ===================================================== */
   let currentWeekStart = getMonday(firstDate);
 
   const rows: WeeklyRow[] = [];
@@ -171,6 +213,9 @@ function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
 
     const highlight: number[] = [];
 
+    /* =====================================================
+       7 DAYS
+    ===================================================== */
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date(weekStart);
 
@@ -178,14 +223,18 @@ function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
 
       const key = formatDate(currentDate);
 
+      // FULL RESULT
       const fullResult = resultMap[key] || "";
 
+      // JODI
       const jodi = jodiMap[key] || "";
 
+      // PUSH
       results.push(fullResult);
 
       values.push(jodi);
 
+      // HIGHLIGHT DOUBLE
       if (jodi && jodi.length === 2 && jodi[0] === jodi[1]) {
         highlight.push(i);
       }
@@ -193,11 +242,19 @@ function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
 
     rows.push({
       week: getWeekKey(weekStart, weekEnd),
+
+      // FULL RESULT ARRAY
       results,
+
+      // JODI ARRAY
       values,
+
       highlight,
     });
 
+    /* =====================================================
+       NEXT WEEK
+    ===================================================== */
     currentWeekStart.setDate(currentWeekStart.getDate() + 7);
   }
 
@@ -223,11 +280,25 @@ export default function PanelChartClient({ slug }: Props) {
     toDate,
   });
 
+  console.log("API DATA =", data);
+
+  /* =========================================================
+     API DATA
+  ========================================================= */
+
   const apiData: ApiItem[] = data?.data || [];
+
+  /* =========================================================
+     WEEKLY DATA
+  ========================================================= */
 
   const chartDataPanel = useMemo(() => {
     return generateWeeklyChart(apiData);
   }, [apiData]);
+
+  /* =========================================================
+     LATEST RESULT
+  ========================================================= */
 
   const latestResult =
     apiData?.length > 0 ? apiData[apiData.length - 1]?.result : "Loading...";
@@ -235,316 +306,252 @@ export default function PanelChartClient({ slug }: Props) {
   return (
     <div
       id="top"
-      className="min-h-screen bg-[#0b1020] text-white overflow-hidden"
+      className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black py-2 text-white"
     >
-      {/* TOP GLOW */}
-      <div className="absolute top-0 left-0 w-full h-[350px] bg-gradient-to-b from-orange-500/20 via-yellow-500/10 to-transparent blur-3xl pointer-events-none" />
+      <div className="w-full px-1 sm:px-2">
+        {/* HEADER */}
+        <div className="overflow-hidden border-2 border-cyan-500 shadow-lg shadow-cyan-500/20">
+          <div className="bg-gradient-to-r from-cyan-700 to-blue-900 py-3 text-center">
+            <h1 className="text-sm sm:text-lg md:text-3xl font-black italic uppercase text-cyan-300 tracking-wide">
+              {formattedTitle}
+            </h1>
+          </div>
 
-      <div className="relative z-10 max-w-[1700px] mx-auto px-2 sm:px-4 py-3">
-        {/* HERO */}
-        <div className="rounded-3xl overflow-hidden border border-yellow-500/30 bg-gradient-to-br from-[#121a31] to-[#0c1224] shadow-2xl shadow-yellow-500/10">
-          <div className="px-4 py-6 md:py-10 text-center relative">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,184,0,0.15),transparent_40%)]" />
-
-            <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/40 bg-yellow-500/10 px-4 py-1 text-[10px] sm:text-xs md:text-sm font-bold tracking-widest text-yellow-300 uppercase">
-                Live Panel Record Chart
-              </div>
-
-              <h1 className="mt-4 text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-wide text-white">
-                {formattedTitle}
-              </h1>
-
-              <p className="mt-4 text-[11px] sm:text-sm md:text-base text-slate-300 leading-relaxed max-w-5xl mx-auto">
-                Weekly panel chart with daily jodi records, patti history,
-                market panel data, guessing support and latest live results.
-              </p>
-
-              {/* LIVE RESULT CARD */}
-              <div className="mt-6 flex justify-center">
-                <div className="rounded-2xl border border-orange-400/40 bg-black/40 backdrop-blur-xl px-6 py-5 shadow-xl">
-                  <div className="text-xs sm:text-sm uppercase tracking-[3px] text-yellow-300 font-bold">
-                    Latest Result
-                  </div>
-
-                  <div className="mt-2 text-3xl sm:text-5xl md:text-6xl font-black text-orange-400 tracking-widest">
-                    {latestResult}
-                  </div>
-
-                  <button
-                    onClick={() => refetch()}
-                    className="mt-5 rounded-xl bg-gradient-to-r from-orange-500 to-yellow-500 px-5 py-3 text-black text-xs sm:text-sm md:text-base font-black shadow-lg hover:scale-105 transition-all duration-300"
-                  >
-                    {isFetching ? "Refreshing..." : "Refresh Result"}
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div className="border-t-2 border-pink-500 bg-slate-900 py-3 text-center">
+            <h2 className="text-xs sm:text-base md:text-2xl font-black italic text-pink-400">
+              {formattedTitle}
+            </h2>
+            <p className="lowercase">
+              {formattedTitle} panel chart, dhan express night panel patti
+              record chart, day {formattedTitle} matka panel chart,{" "}
+              {formattedTitle} panel chart guessing, {formattedTitle} matka day
+              night panel chart, {formattedTitle} chart panel, day dhan express
+              penal chart record, {formattedTitle} panel chart result
+            </p>
           </div>
         </div>
 
-        {/* FILTER SECTION */}
-        <div className="mt-5 rounded-3xl border border-slate-700 bg-[#111827]/90 backdrop-blur-xl p-4 md:p-6">
-          <div className="flex flex-col lg:flex-row items-center gap-5 justify-between">
-            <div>
-              <h2 className="text-lg md:text-2xl font-black text-yellow-400">
-                Date Filter
-              </h2>
-
-              <p className="text-slate-400 text-xs sm:text-sm mt-1">
-                Select custom dates to load old panel chart records.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-              <div className="flex flex-col">
-                <label className="text-xs font-bold text-orange-300 mb-2">
-                  FROM DATE
-                </label>
-
-                <input
-                  type="date"
-                  value={fromDate}
-                  onChange={(e) => setFromDate(e.target.value)}
-                  className="bg-[#0b1020] border border-orange-500/30 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-400"
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label className="text-xs font-bold text-yellow-300 mb-2">
-                  TO DATE
-                </label>
-
-                <input
-                  type="date"
-                  value={toDate}
-                  onChange={(e) => setToDate(e.target.value)}
-                  className="bg-[#0b1020] border border-yellow-500/30 rounded-xl px-4 py-3 text-white outline-none focus:border-yellow-400"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* QUICK BUTTONS */}
-        <div className="flex justify-center gap-3 mt-5 flex-wrap">
-          <a
-            href="#chart"
-            className="rounded-full bg-yellow-500 text-black px-5 py-3 text-xs sm:text-sm font-black hover:scale-105 transition"
-          >
-            View Chart
-          </a>
-
-          <a
-            href="#bottom"
-            className="rounded-full border border-orange-400 text-orange-300 px-5 py-3 text-xs sm:text-sm font-black hover:bg-orange-500/10 transition"
-          >
-            Go Bottom
-          </a>
-        </div>
-
-        {/* LOADER */}
-        {isLoading && (
-          <div className="py-16 text-center">
-            <div className="inline-flex items-center gap-3 rounded-2xl border border-yellow-500/30 bg-[#111827] px-6 py-4">
-              <div className="h-4 w-4 rounded-full bg-yellow-400 animate-ping" />
-
-              <span className="text-lg font-black text-yellow-300">
-                Loading Chart...
-              </span>
-            </div>
-          </div>
-        )}
-
-        {/* CHART */}
-        {!isLoading && (
-          <div
-            id="chart"
-            className="mt-6 rounded-3xl overflow-hidden border border-yellow-500/20 bg-[#111827] shadow-2xl"
-          >
-            {/* TOP BAR */}
-            <div className="bg-gradient-to-r from-orange-500 to-yellow-500 px-4 py-3 flex items-center justify-between">
-              <h2 className="text-black text-sm sm:text-lg md:text-2xl font-black uppercase">
-                {formattedTitle} Weekly Panel Chart
-              </h2>
-
-              <div className="text-black text-[10px] sm:text-xs md:text-sm font-black">
-                Total Weeks : {chartDataPanel.length}
-              </div>
-            </div>
-
-            {/* CHART VIEW SAME */}
-            <div className="w-full overflow-x-auto">
-              <div className="min-w-[700px]">
-                {chartDataPanel.map((row, rowIndex) => (
-                  <div
-                    key={rowIndex}
-                    className="grid grid-cols-8 border-b border-slate-700"
-                  >
-                    {/* DATE */}
-                    <div className="flex flex-col items-center justify-center border-r border-slate-700 bg-[#1b243c] py-[2px]">
-                      <div className="text-[5px] sm:text-[7px] md:text-[11px] font-black italic leading-none text-yellow-300">
-                        {row.week.split(" To ")[0]}
-                      </div>
-
-                      <div className="text-[6px] sm:text-[9px] md:text-[14px] font-black italic leading-none text-orange-400">
-                        To
-                      </div>
-
-                      <div className="text-[5px] sm:text-[7px] md:text-[11px] font-black italic leading-none text-yellow-300">
-                        {row.week.split(" To ")[1]}
-                      </div>
-                    </div>
-
-                    {/* VALUES */}
-                    {row.values.map((value, index) => (
-                      <div
-                        key={index}
-                        className="relative flex h-[34px] sm:h-[45px] md:h-[65px] items-center justify-center border-r border-slate-700 bg-[#0b1020]"
-                      >
-                        <MiniDigits value={row.results[index]} />
-
-                        <span
-                          className={`relative z-10 text-[10px] sm:text-[12px] md:text-[22px] font-black italic leading-none ${
-                            row.highlight.includes(index)
-                              ? "text-orange-400"
-                              : "text-white"
-                          }`}
-                          style={{
-                            fontFamily: "Georgia, serif",
-                            textShadow:
-                              "0px 0px 12px rgba(251,191,36,0.55)",
-                          }}
-                        >
-                          {value || "-"}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* BOTTOM ACTION */}
-        <div className="mt-6 flex justify-center">
-          <a
-            href="#top"
-            className="rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-3 text-black text-xs sm:text-sm md:text-base font-black hover:scale-105 transition"
-          >
-            Back To Top
-          </a>
-        </div>
-
-        {/* FOOTER RESULT */}
-        <div className="mt-6 rounded-3xl border border-orange-500/20 bg-gradient-to-br from-[#121a31] to-[#0b1020] p-6 text-center">
-          <div className="text-xs sm:text-sm uppercase tracking-[4px] text-yellow-300 font-black">
-            Current Live Result
-          </div>
-
-          <h2 className="mt-3 text-xl sm:text-3xl md:text-5xl font-black text-white uppercase">
+        {/* RESULT */}
+        <div className="border-2 border-cyan-500 bg-slate-900 py-3 text-center mt-2">
+          <h2 className="text-xs sm:text-sm md:text-xl font-extrabold uppercase text-cyan-300">
             {formattedTitle}
           </h2>
 
-          <div className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black text-orange-400">
+          <div className="text-lg sm:text-3xl md:text-5xl font-black text-pink-400 mt-1">
             {latestResult}
           </div>
 
           <button
             onClick={() => refetch()}
-            className="mt-5 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-3 text-black text-xs sm:text-sm md:text-base font-black hover:scale-105 transition"
+            className="mt-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 px-4 py-2 text-[10px] sm:text-sm md:text-lg font-black italic text-white shadow-lg hover:scale-105 transition"
           >
             {isFetching ? "Refreshing..." : "Refresh Result"}
           </button>
         </div>
 
-        {/* WHATSAPP */}
-        <div className="mt-6 rounded-3xl overflow-hidden bg-gradient-to-r from-green-500 to-emerald-700 p-[1px] shadow-2xl">
-          <div className="rounded-3xl bg-[#0b1020] px-5 py-5 text-center">
-            <div className="text-lg md:text-2xl font-black text-green-400">
-              Join WhatsApp Channel
+        {/* DATE FILTER */}
+        <div className="mt-4 border-2 border-pink-500 bg-slate-900 rounded-xl p-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col w-full md:w-auto">
+              <label className="mb-1 text-cyan-300 font-bold text-sm">
+                From Date
+              </label>
+
+              <input
+                type="date"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+                className="bg-slate-800 border border-cyan-500 rounded-lg px-4 py-2 text-white outline-none"
+              />
             </div>
 
-            <div className="mt-2 text-sm md:text-lg font-bold text-white">
-              Fast Result • Daily Fix • Live Update
+            <div className="flex flex-col w-full md:w-auto">
+              <label className="mb-1 text-pink-400 font-bold text-sm">
+                To Date
+              </label>
+
+              <input
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+                className="bg-slate-800 border border-pink-500 rounded-lg px-4 py-2 text-white outline-none"
+              />
             </div>
           </div>
         </div>
 
-        {/* NAVIGATION */}
-        <div className="mt-6 rounded-3xl border border-slate-700 bg-[#111827] p-5">
-          <div className="flex flex-wrap justify-center gap-3 text-xs sm:text-sm md:text-base font-black">
-            <Link
-              href="/"
-              className="rounded-full bg-yellow-500/10 border border-yellow-500/20 px-4 py-2 text-yellow-300 hover:bg-yellow-500/20 transition"
-            >
-              Home
-            </Link>
-
-            <Link
-              href="/satta-matka-guessing-forum"
-              className="rounded-full bg-orange-500/10 border border-orange-500/20 px-4 py-2 text-orange-300 hover:bg-orange-500/20 transition"
-            >
-              Matka Guessing
-            </Link>
-
-            <Link
-              href="/satta-matka-chart"
-              className="rounded-full bg-blue-500/10 border border-blue-500/20 px-4 py-2 text-blue-300 hover:bg-blue-500/20 transition"
-            >
-              Matka Chart
-            </Link>
-
-            <Link
-              href="/online-matka-play"
-              className="rounded-full bg-pink-500/10 border border-pink-500/20 px-4 py-2 text-pink-300 hover:bg-pink-500/20 transition"
-            >
-              Matka Play
-            </Link>
-
-            <Link
-              href="/tara-matka-mumbai"
-              className="rounded-full bg-green-500/10 border border-green-500/20 px-4 py-2 text-green-300 hover:bg-green-500/20 transition"
-            >
-              Tara Matka
-            </Link>
-
-            <Link
-              href="/fix-matka-number"
-              className="rounded-full bg-red-500/10 border border-red-500/20 px-4 py-2 text-red-300 hover:bg-red-500/20 transition"
-            >
-              Fix Matka
-            </Link>
-          </div>
+        {/* GO BOTTOM */}
+        <div className="my-3 flex justify-center">
+          <a
+            href="#bottom"
+            className="rounded border border-cyan-400 bg-slate-900 px-3 py-2 text-[10px] sm:text-xs md:text-sm font-bold italic text-cyan-300 shadow-lg hover:bg-slate-800 transition"
+          >
+            Go to Bottom
+          </a>
         </div>
 
-        {/* FOOTER */}
-        <div
-          id="bottom"
-          className="mt-6 rounded-3xl overflow-hidden border border-yellow-500/20 bg-gradient-to-br from-[#121a31] via-[#0f172a] to-[#0b1020]"
-        >
-          <div className="px-5 py-8 text-center">
-            <h2 className="text-2xl md:text-4xl font-black text-yellow-400 uppercase">
-              sattamatkadp
-            </h2>
-
-            <div className="mt-4 text-sm md:text-xl font-black text-white">
-              ALL RIGHTS RESERVED (2012-2026)
-            </div>
-
-            <div className="mt-4 text-orange-400 text-lg md:text-2xl font-black">
-              FAST BOSS SIR
-            </div>
-
-            <div className="mt-3 text-yellow-300 text-lg md:text-3xl font-black tracking-widest">
-              1234567890
-            </div>
-
-            <div className="mt-4 text-slate-400 text-xs md:text-base break-all">
-              https://sattamatkadpbos.com
-            </div>
+        {/* LOADING */}
+        {isLoading && (
+          <div className="text-center py-10 text-cyan-300 font-black text-xl">
+            Loading Chart...
           </div>
+        )}
+
+        {/* CHART */}
+        {!isLoading && (
+          <div className="w-full border-[2px] sm:border-[3px] border-cyan-500 bg-slate-900 shadow-2xl overflow-hidden">
+            {chartDataPanel.map((row, rowIndex) => (
+              <div
+                key={rowIndex}
+                className="grid grid-cols-8 border-b border-slate-700"
+              >
+                {/* DATE */}
+                <div className="flex flex-col items-center justify-center border-r border-slate-700 bg-slate-800 py-[2px]">
+                  <div className="text-[5px] sm:text-[7px] md:text-[11px] font-black italic leading-none text-cyan-300">
+                    {row.week.split(" To ")[0]}
+                  </div>
+
+                  <div className="text-[6px] sm:text-[9px] md:text-[14px] font-black italic leading-none text-pink-400">
+                    To
+                  </div>
+
+                  <div className="text-[5px] sm:text-[7px] md:text-[11px] font-black italic leading-none text-cyan-300">
+                    {row.week.split(" To ")[1]}
+                  </div>
+                </div>
+
+                {/* VALUES */}
+                {row.values.map((value, index) => (
+                  <div
+                    key={index}
+                    className="relative flex h-[34px] sm:h-[45px] md:h-[65px] items-center justify-center border-r border-slate-700 bg-slate-950"
+                  >
+                    <MiniDigits value={row.results[index]} />
+
+                    <span
+                      className={`relative z-10 text-[10px] sm:text-[12px] md:text-[22px] font-black italic leading-none ${
+                        row.highlight.includes(index)
+                          ? "text-pink-400"
+                          : "text-white"
+                      }`}
+                      style={{
+                        fontFamily: "Georgia, serif",
+                        textShadow: "0px 0px 10px rgba(34,211,238,0.8)",
+                      }}
+                    >
+                      {value || "-"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* GO TOP */}
+        <div id="bottom" className="my-3 flex justify-center">
+          <a
+            href="#top"
+            className="rounded border border-pink-400 bg-slate-900 px-3 py-2 text-[10px] sm:text-xs md:text-sm font-bold italic text-pink-400 shadow-lg hover:bg-slate-800 transition"
+          >
+            Go to Top
+          </a>
+        </div>
+
+        {/* FOOTER RESULT */}
+        <div className="border-2 border-cyan-500 bg-slate-900 text-center py-3 mt-3 mx-1">
+          <h1 className="text-cyan-300 text-xs sm:text-sm md:text-xl font-black uppercase tracking-wide">
+            {formattedTitle}
+          </h1>
+
+          <div className="text-lg sm:text-2xl md:text-4xl font-black text-pink-400 mt-1">
+            {latestResult}
+          </div>
+
+          <button
+            onClick={() => refetch()}
+            className="mt-3 px-4 py-2 bg-gradient-to-r from-pink-500 to-cyan-500 rounded-full text-white text-[10px] sm:text-xs md:text-base font-black shadow-lg hover:scale-105 transition"
+          >
+            {isFetching ? "Refreshing..." : "Refresh Result"}
+          </button>
+        </div>
+      </div>
+      {/* Whatsapp Banner */}
+      <div className="flex justify-center mt-4 px-2">
+        <div className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center">
+          Join our WhatsApp channel for fast Result
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="bg-slate-900 border border-cyan-500 mt-5 py-4 mx-2 rounded-xl">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 text-xs sm:text-sm md:text-lg font-bold">
+          <Link href="/" className="text-cyan-400">
+            Home
+          </Link>
+
+          {" | "}
+
+          <Link href="/satta-matka-guessing-forum" className="text-pink-400">
+            Matka Guessing
+          </Link>
+
+          {" | "}
+
+          <Link href="/satta-matka-chart" className="text-yellow-400">
+            Matka Chart
+          </Link>
+
+          {" | "}
+
+          <Link href="/online-matka-play" className="text-blue-400">
+            Matka Play
+          </Link>
+
+          {" | "}
+
+          <Link href="/tara-matka-mumbai" className="text-green-400">
+            Tara Matka
+          </Link>
+
+          {" | "}
+
+          <Link href="/fix-matka-number" className="text-orange-400">
+            Fix Matka
+          </Link>
+
+          {" | "}
+
+          <Link href="/sitemap.xml" className="text-orange-400">
+            Sitemap
+          </Link>
+        </div>
+      </div>
+
+      {/* Main Footer */}
+      <div className="bg-slate-900 border border-cyan-500 text-center py-5 mt-4 mx-2 rounded-xl shadow-lg">
+        <h2 className="text-pink-400 text-lg md:text-2xl font-black italic">
+          sattamatkadpbos
+        </h2>
+
+        <div className="mt-3 text-sm md:text-lg font-black text-cyan-300">
+          ALL RIGHTS RESERVED (2012-2026)
+        </div>
+
+        <div className="mt-2 text-sm md:text-lg font-black text-white">
+          SITE OWNER:-
+        </div>
+
+        <div className="mt-2 text-sm md:text-xl font-black underline text-pink-400">
+          FAST BOSS SIR
+        </div>
+
+        <div className="mt-2 text-cyan-300 text-sm md:text-xl font-black">
+          1234567890
+        </div>
+
+        <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">
+          https://sattamatkadpbos.com
         </div>
       </div>
     </div>

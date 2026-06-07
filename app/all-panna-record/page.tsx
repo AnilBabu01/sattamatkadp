@@ -1,14 +1,7 @@
+
 import Link from "next/link";
 
 import { Metadata } from "next";
-import {
-  Info,
-  BarChart3,
-  Pin,
-  Flame,
-  Sparkles,
-  Crown,
-} from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -20,10 +13,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+
+import { Info, BarChart3, Pin, Flame } from "lucide-react";
+
+
 const pannaData = [
   {
     number: 1,
-    color: "from-pink-500 to-rose-500",
+    color: "bg-fuchsia-600",
     values: [
       "137__128__146__236__245__290",
       "380__470__489__560__678__579",
@@ -33,7 +30,7 @@ const pannaData = [
   },
   {
     number: 2,
-    color: "from-violet-500 to-indigo-500",
+    color: "bg-violet-600",
     values: [
       "129__138__147__156__237__246",
       "345__390__480__570__589__679",
@@ -43,7 +40,7 @@ const pannaData = [
   },
   {
     number: 3,
-    color: "from-cyan-500 to-sky-500",
+    color: "bg-cyan-600",
     values: [
       "120__139__148__157__238__247",
       "256__346__490__580__670__689",
@@ -53,7 +50,7 @@ const pannaData = [
   },
   {
     number: 4,
-    color: "from-blue-500 to-cyan-500",
+    color: "bg-sky-600",
     values: [
       "130__149__158__167__239__248",
       "257__347__356__590__680__789",
@@ -63,7 +60,7 @@ const pannaData = [
   },
   {
     number: 5,
-    color: "from-emerald-500 to-green-500",
+    color: "bg-emerald-600",
     values: [
       "140__159__168__230__249__258",
       "267__348__357__456__690__780",
@@ -73,7 +70,7 @@ const pannaData = [
   },
   {
     number: 6,
-    color: "from-teal-500 to-emerald-500",
+    color: "bg-teal-600",
     values: [
       "123__150__169__178__240__259",
       "268__349__358__367__457__790",
@@ -83,7 +80,7 @@ const pannaData = [
   },
   {
     number: 7,
-    color: "from-indigo-500 to-violet-500",
+    color: "bg-indigo-600",
     values: [
       "124__160__179__250__269__278",
       "340__359__368__458__467__890",
@@ -93,7 +90,7 @@ const pannaData = [
   },
   {
     number: 8,
-    color: "from-fuchsia-500 to-pink-500",
+    color: "bg-pink-600",
     values: [
       "125__134__170__189__260__279",
       "350__369__378__459__468__567",
@@ -103,7 +100,7 @@ const pannaData = [
   },
   {
     number: 9,
-    color: "from-rose-500 to-red-500",
+    color: "bg-rose-600",
     values: [
       "126__135__180__234__270__289",
       "360__379__450__469__478__568",
@@ -113,7 +110,7 @@ const pannaData = [
   },
   {
     number: 0,
-    color: "from-amber-400 to-orange-500",
+    color: "bg-amber-600",
     values: [
       "127__136__145__190__235__280",
       "370__389__460__479__569__578",
@@ -222,7 +219,7 @@ function HighlightText({
           <span
             className={
               highlights.includes(part)
-                ? "text-yellow-300 font-black"
+                ? "text-fuchsia-500 font-black"
                 : "text-slate-200"
             }
           >
@@ -230,7 +227,7 @@ function HighlightText({
           </span>
 
           {index !== parts.length - 1 && (
-            <span className="text-emerald-400">-</span>
+            <span className="text-cyan-400">-</span>
           )}
         </span>
       ))}
@@ -240,373 +237,330 @@ function HighlightText({
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-[#050816] text-white overflow-hidden">
-      {/* HERO */}
-      <section className="relative px-3 pt-4">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.15),transparent_50%)]" />
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-black to-slate-900 py-4 text-center">
+      {/* HEADER */}
+      <div className="mx-2 border-2 border-cyan-400 bg-gradient-to-r from-fuchsia-700 via-violet-700 to-cyan-700 py-4 rounded-xl shadow-xl">
+        <h1 className="text-2xl font-black italic tracking-wide text-white">
+          ✨ ALL PANNA RECORD CHART ✨
+        </h1>
+      </div>
 
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[30px] border border-white/10 bg-[#0b1220] shadow-2xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10" />
+      <div className="mx-2 mt-3 border-2 border-fuchsia-500 bg-slate-900 rounded-xl py-4 px-3">
+        <h2 className="text-xl italic font-black text-cyan-300">
+          SATTA MATKA WEEKLY PATTI CHART
+        </h2>
 
-          <div className="relative px-4 py-10 md:px-10">
-            <div className="flex justify-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-5 py-2">
-                <Sparkles className="text-emerald-300" size={18} />
-                <span className="font-bold tracking-wide text-emerald-300">
-                  PREMIUM MATKA RECORD
-                </span>
-              </div>
+        <p className="mt-3 text-slate-300 italic text-sm leading-7">
+          matka 220 patti, matka 220 patti chart, matka satta bazar 220 patti,
+          220 patti guessing, matka patti formula
+        </p>
+      </div>
+
+      {/* TITLE */}
+      <div className="mx-4 mt-5 rounded-xl border-2 border-cyan-400 bg-gradient-to-r from-fuchsia-600 to-cyan-600 py-3 shadow-lg">
+        <h2 className="text-xl italic font-black tracking-wide text-white">
+          🔥 ALL PANNA RECORD 🔥
+        </h2>
+      </div>
+
+      {/* PANNA DATA */}
+      <div className="mt-8 space-y-10">
+        {pannaData.map((item) => (
+          <div key={item.number}>
+            {/* CIRCLE */}
+            <div
+              className={`w-28 h-28 mx-auto rounded-full ${item.color}
+              flex items-center justify-center
+              text-white text-6xl font-black
+              border-[6px] border-slate-800 shadow-[0_0_30px_rgba(34,211,238,0.4)]`}
+            >
+              {item.number}
             </div>
 
-            <h1 className="mt-6 text-center text-4xl md:text-6xl font-black leading-tight">
-              <span className="bg-gradient-to-r from-emerald-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                ALL PANNA
-              </span>
-              <br />
-              <span className="text-white">220 PATTI CHART</span>
-            </h1>
-
-            <p className="mx-auto mt-6 max-w-3xl text-center text-base md:text-lg leading-8 text-slate-300">
-              Complete Satta Matka 220 Patti Record with hot panna list,
-              single pana, double pana and triple pana chart.
-            </p>
-
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-6 py-4">
-                <p className="text-sm font-bold text-emerald-300">
-                  TOTAL PATTI
-                </p>
-
-                <h3 className="mt-1 text-3xl font-black text-white">220</h3>
-              </div>
-
-              <div className="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 px-6 py-4">
-                <p className="text-sm font-bold text-cyan-300">
-                  HOT NUMBERS
-                </p>
-
-                <h3 className="mt-1 text-3xl font-black text-white">
-                  DAILY
-                </h3>
-              </div>
-
-              <div className="rounded-2xl border border-blue-500/30 bg-blue-500/10 px-6 py-4">
-                <p className="text-sm font-bold text-blue-300">
-                  PATTI GROUP
-                </p>
-
-                <h3 className="mt-1 text-3xl font-black text-white">0-9</h3>
-              </div>
+            {/* DATA BOX */}
+            <div
+              className="
+              mx-2 md:mx-6
+              mt-4
+              rounded-2xl
+              bg-slate-900
+              border-2 border-cyan-500
+              py-5
+              px-2
+              text-cyan-300
+              italic
+              font-black
+              text-lg
+              leading-loose
+              shadow-xl
+            "
+            >
+              {item.values.map((row, index) => (
+                <div key={index}>{row}</div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* PANNA RECORD */}
-      <section className="mx-auto mt-10 max-w-7xl px-3">
-        <div className="mb-8 flex items-center justify-center gap-3">
-          <Crown className="text-yellow-400" size={30} />
-
-          <h2 className="text-center text-3xl md:text-5xl font-black">
-            PANNA RECORD CHART
-          </h2>
-        </div>
-
-        <div className="space-y-10">
-          {pannaData.map((item) => (
-            <div
-              key={item.number}
-              className="overflow-hidden rounded-[28px] border border-white/10 bg-[#0b1220] shadow-2xl"
-            >
-              <div className="grid lg:grid-cols-[220px_1fr]">
-                {/* LEFT */}
-                <div
-                  className={`bg-gradient-to-br ${item.color} flex flex-col items-center justify-center py-10`}
-                >
-                  <div className="flex h-32 w-32 items-center justify-center rounded-full border-[10px] border-white/20 bg-black/20 text-6xl font-black text-white shadow-2xl">
-                    {item.number}
-                  </div>
-
-                  <p className="mt-5 text-xl font-black tracking-[5px] text-white">
-                    PATTI
-                  </p>
-                </div>
-
-                {/* RIGHT */}
-                <div className="p-4 md:p-8">
-                  <div className="grid gap-4">
-                    {item.values.map((row, index) => (
-                      <div
-                        key={index}
-                        className="rounded-2xl border border-white/10 bg-[#111827] px-4 py-5 text-center text-base md:text-xl font-black tracking-wide text-slate-200 shadow-lg"
-                      >
-                        {row}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+        ))}
+      </div>
 
       {/* HOT PANNA */}
-      <section className="mx-auto mt-16 max-w-7xl px-3">
-        <div className="rounded-[30px] border border-yellow-500/20 bg-gradient-to-r from-yellow-500/10 via-orange-500/10 to-red-500/10 p-5">
-          <h2 className="text-center text-3xl md:text-5xl font-black text-white">
-            🔥 HOT PANNA RECORD
-          </h2>
-        </div>
+      <div className="mx-2 mt-10 rounded-xl border-2 border-fuchsia-500 bg-gradient-to-r from-cyan-700 to-fuchsia-700 py-3">
+        <h1 className="text-center text-2xl font-black italic text-white">
+          💎 ALL HOT PANNA (PATTI)
+        </h1>
+      </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+      <div className="mx-2 mt-3 rounded-2xl border-2 border-cyan-500 bg-slate-900 py-6 px-3 shadow-xl">
+        <div className="max-w-4xl mx-auto text-center">
           {hotPannaData.map((item, index) => (
             <div
               key={index}
-              className="rounded-[28px] border border-white/10 bg-[#0b1220] p-6 shadow-2xl"
+              className="mb-10 rounded-2xl border border-fuchsia-500 bg-slate-950 p-5"
             >
-              <div className="mb-6 flex items-center justify-between">
-                <h3 className="text-2xl font-black text-yellow-300">
-                  {item.title}
-                </h3>
+              <h2 className="mb-5 text-2xl font-black italic text-cyan-300">
+                {item.title}
+              </h2>
 
-                <div className="rounded-full bg-yellow-500/10 px-4 py-1 text-sm font-bold text-yellow-300">
-                  HOT
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                {item.rows.map((row, rowIndex) => (
-                  <div
-                    key={rowIndex}
-                    className="rounded-2xl border border-white/10 bg-[#111827] p-4 text-base md:text-lg font-bold leading-9"
-                  >
-                    <HighlightText
-                      text={row}
-                      highlights={item.highlights}
-                    />
-                  </div>
-                ))}
-              </div>
+              {item.rows.map((row, rowIndex) => (
+                <p
+                  key={rowIndex}
+                  className="italic font-bold text-lg md:text-xl leading-10"
+                >
+                  <HighlightText
+                    text={row}
+                    highlights={item.highlights}
+                  />
+                </p>
+              ))}
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
       {/* INFO SECTION */}
-      <section className="mx-auto mt-16 max-w-7xl px-3 pb-16">
-        <div className="grid gap-6 lg:grid-cols-2">
-          {/* CARD */}
-          <div className="rounded-[30px] border border-white/10 bg-[#0b1220] p-8 shadow-2xl">
-            <div className="mb-6 flex items-center gap-4">
-              <div className="rounded-2xl bg-cyan-500/10 p-4">
-                <Info className="text-cyan-300" size={28} />
-              </div>
+      <div className="bg-gradient-to-b from-slate-950 to-black py-10 px-3 md:px-6 space-y-6">
+        {/* INFO BOX */}
+        <div className="bg-slate-900 border-2 border-cyan-500 rounded-3xl shadow-2xl max-w-4xl mx-auto p-6 md:p-8">
+          <h3 className="font-black text-3xl mb-6 text-fuchsia-400 text-center">
+            📄 What is All Panna Record in Satta Matka?
+          </h3>
 
-              <h2 className="text-2xl font-black text-white">
-                What is 220 Patti?
-              </h2>
-            </div>
-
-            <p className="leading-9 text-slate-300">
-              In Satta Matka there are total 220 valid Patti numbers. These
-              are divided according to their final ank and used for guessing
-              and market analysis.
-            </p>
-
-            <div className="mt-6 grid gap-4">
-              {[
-                "128 → 1+2+8 = 11 → Final Ank 1",
-                "236 → 2+3+6 = 11 → Final Ank 1",
-                "137 → 1+3+7 = 11 → Final Ank 1",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 font-bold text-cyan-200"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* CARD */}
-          <div className="rounded-[30px] border border-white/10 bg-[#0b1220] p-8 shadow-2xl">
-            <div className="mb-6 flex items-center gap-4">
-              <div className="rounded-2xl bg-pink-500/10 p-4">
-                <BarChart3 className="text-pink-300" size={28} />
-              </div>
-
-              <h2 className="text-2xl font-black text-white">
-                Patti Types
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                {
-                  title: "SINGLE PANA",
-                  desc: "123, 456, 789",
-                },
-                {
-                  title: "DOUBLE PANA",
-                  desc: "112, 224, 338",
-                },
-                {
-                  title: "TRIPLE PANA",
-                  desc: "111, 222, 999",
-                },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-2xl border border-white/10 bg-[#111827] p-5"
-                >
-                  <h3 className="text-lg font-black text-pink-300">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-2 text-slate-300">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* CARD */}
-          <div className="rounded-[30px] border border-white/10 bg-[#0b1220] p-8 shadow-2xl">
-            <div className="mb-6 flex items-center gap-4">
-              <div className="rounded-2xl bg-emerald-500/10 p-4">
-                <Pin className="text-emerald-300" size={28} />
-              </div>
-
-              <h2 className="text-2xl font-black text-white">
-                How To Use?
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                "Find your final ank",
-                "Open that panna group",
-                "Check recent repeating numbers",
-                "Compare with weekly chart",
-                "Select high-frequency panna",
-              ].map((step, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-4 rounded-2xl border border-white/10 bg-[#111827] p-4"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-lg font-black text-white">
-                    {index + 1}
-                  </div>
-
-                  <p className="font-semibold text-slate-300">{step}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* CARD */}
-          <div className="rounded-[30px] border border-white/10 bg-[#0b1220] p-8 shadow-2xl">
-            <div className="mb-6 flex items-center gap-4">
-              <div className="rounded-2xl bg-yellow-500/10 p-4">
-                <Flame className="text-yellow-300" size={28} />
-              </div>
-
-              <h2 className="text-2xl font-black text-white">
-                Hot Panna Numbers
-              </h2>
-            </div>
-
-            <p className="leading-9 text-slate-300">
-              Hot Panna are numbers that repeat frequently in specific markets.
-              These numbers are tracked by players for guessing trends and
-              pattern analysis.
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              {["146", "228", "337", "447", "566", "668"].map((num) => (
-                <div
-                  key={num}
-                  className="rounded-full border border-yellow-500/20 bg-yellow-500/10 px-5 py-2 font-black text-yellow-300"
-                >
-                  {num}
-                </div>
-              ))}
-            </div>
-          </div>
+          <p className="text-center text-base md:text-lg leading-9 text-slate-300">
+            All Panna Record is a complete reference chart of all 220 valid
+            three-digit numbers used in Satta Matka. These numbers are called
+            Panna, Patti, or Panel.
+          </p>
         </div>
-      </section>
+
+        {/* SECTION 1 */}
+        <section className="max-w-4xl mx-auto bg-slate-900 rounded-3xl border-2 border-cyan-500 p-6 shadow-xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="bg-cyan-500/20 p-3 rounded-xl">
+              <Info size={22} className="text-cyan-300" />
+            </div>
+
+            <h2 className="font-black italic text-1xl text-white">
+              What is 220 Patti in Satta Matka?
+            </h2>
+          </div>
+
+          <p className="text-center italic font-semibold text-slate-300 leading-8">
+            In Satta Matka, there are exactly 220 valid Panna numbers.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-4 mt-6">
+            {[
+              {
+                title: "EXAMPLE 1",
+                panna: "128 → 1+2+8 = 11",
+                result: "Final Ank → 1",
+              },
+              {
+                title: "EXAMPLE 2",
+                panna: "236 → 2+3+6 = 11",
+                result: "Final Ank → 1",
+              },
+              {
+                title: "EXAMPLE 3",
+                panna: "137 → 1+3+7 = 11",
+                result: "Final Ank → 1",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-fuchsia-500 bg-slate-950 p-5 text-center"
+              >
+                <p className="text-sm font-black text-cyan-300">
+                  {item.title}
+                </p>
+
+                <p className="font-black text-white">{item.panna}</p>
+
+                <p className="italic font-bold text-fuchsia-400">
+                  {item.result}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* SECTION 2 */}
+        <section className="max-w-4xl mx-auto bg-slate-900 rounded-3xl border-2 border-fuchsia-500 p-6 shadow-xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="bg-fuchsia-500/20 p-3 rounded-xl">
+              <BarChart3 size={22} className="text-fuchsia-300" />
+            </div>
+
+            <h2 className="font-black italic text-1xl text-white">
+              Panna types — single, double and triple
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                title: "SINGLE PANA",
+                desc: "All three digits are different",
+                value: "123, 456, 789",
+              },
+              {
+                title: "DOUBLE PANA",
+                desc: "Two digits are the same",
+                value: "112, 224, 338",
+              },
+              {
+                title: "TRIPLE PANA",
+                desc: "All three digits are same",
+                value: "111, 222 ... 000",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-1xl border border-cyan-500 bg-slate-950 p-6 text-center"
+              >
+                <h3 className="text-sm font-black text-cyan-300 mb-4">
+                  {item.title}
+                </h3>
+
+                <p className="italic font-semibold text-slate-300">
+                  {item.desc}
+                </p>
+
+                <p className="mt-4 font-black text-fuchsia-400">
+                  {item.value}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* SECTION 3 */}
+        <section className="max-w-4xl mx-auto bg-slate-900 rounded-3xl border-2 border-cyan-500 p-6 shadow-xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="bg-cyan-500/20 p-3 rounded-xl">
+              <Pin size={22} className="text-cyan-300" />
+            </div>
+
+            <h2 className="font-black italic text-1xl text-white">
+              How to use All Panna Record for guessing?
+            </h2>
+          </div>
+
+          <div className="space-y-5">
+            {[
+              "Find your predicted final ank (0 to 9)",
+              "Go to that digit group in the Panna chart",
+              "Study which Panna numbers appear most in recent results",
+              "Cross-check with Weekly Patti Chart for hot numbers",
+              "Select your Panna based on pattern and frequency",
+            ].map((step, index) => (
+              <div key={index} className="flex items-center gap-5">
+                <div className="w-10 h-10 rounded-full bg-fuchsia-600 text-white flex items-center justify-center font-black">
+                  {index + 1}
+                </div>
+
+                <p className="italic font-semibold text-slate-300 text-left">
+                  {step}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* SECTION 4 */}
+        <section className="max-w-4xl mx-auto bg-slate-900 rounded-3xl border-2 border-fuchsia-500 p-6 shadow-xl">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="bg-fuchsia-500/20 p-3 rounded-xl">
+              <Flame size={22} className="text-fuchsia-300" />
+            </div>
+
+            <h2 className="font-black italic text-1xl text-white">
+              What are Hot Panna numbers?
+            </h2>
+          </div>
+
+          <p className="italic leading-9 text-slate-300 font-medium">
+            Hot Panna are three-digit numbers that appear more frequently in a
+            particular market during a specific period.
+          </p>
+        </section>
+      </div>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/10 bg-[#060b16] px-3 py-10">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-wrap justify-center gap-3 text-sm md:text-base font-bold">
-            <Link
-              href="/"
-              className="rounded-full bg-cyan-500/10 px-5 py-2 text-cyan-300 transition hover:bg-cyan-500/20"
-            >
-              Home
-            </Link>
+      <footer className="max-w-6xl mx-auto mt-8 overflow-hidden rounded-3xl border-2 border-cyan-500 bg-slate-950 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
+        <div className="text-center py-4 px-2 text-1xl md:text-1xl font-black leading-10">
+          <Link href="/" className="text-cyan-400">
+            Home
+          </Link>
+          {" | "}
+          <Link href="/satta-matka-guessing-forum" className="text-pink-400">
+            Matka Guessing
+          </Link>
+          {" | "}
+          <Link href="/satta-matka-chart" className="text-yellow-400">
+            Matka Chart
+          </Link>
+          {" | "}
+          <Link href="/online-matka-play" className="text-blue-400">
+            Matka Play
+          </Link>
+          {" | "}
+          <Link href="/tara-matka-mumbai" className="text-green-400">
+            Tara Matka
+          </Link>
+          {" | "}
+          <Link href="/fix-matka-number" className="text-orange-400">
+            Fix Matka
+          </Link>
+          {" | "}
+        </div>
 
-            <Link
-              href="/satta-matka-guessing-forum"
-              className="rounded-full bg-pink-500/10 px-5 py-2 text-pink-300 transition hover:bg-pink-500/20"
-            >
-              Guessing Forum
-            </Link>
+        <div className="border-t border-cyan-500" />
 
-            <Link
-              href="/satta-matka-chart"
-              className="rounded-full bg-yellow-500/10 px-5 py-2 text-yellow-300 transition hover:bg-yellow-500/20"
-            >
-              Matka Chart
-            </Link>
+        <div className="text-center py-5 px-2 space-y-2">
+          <h3 className="text-fuchsia-400 text-lg md:text-1xl font-black italic break-all">
+            https://sattamatkadpbos.com
+          </h3>
 
-            <Link
-              href="/online-matka-play"
-              className="rounded-full bg-blue-500/10 px-5 py-2 text-blue-300 transition hover:bg-blue-500/20"
-            >
-              Matka Play
-            </Link>
+          <p className="font-black text-lg text-white">
+            ALL RIGHTS RESERVED (2012-2026)
+          </p>
 
-            <Link
-              href="/tara-matka-mumbai"
-              className="rounded-full bg-green-500/10 px-5 py-2 text-green-300 transition hover:bg-green-500/20"
-            >
-              Tara Matka
-            </Link>
+          <p className="font-black text-lg text-cyan-300">
+            SITE OWNER:-
+          </p>
 
-            <Link
-              href="/fix-matka-number"
-              className="rounded-full bg-orange-500/10 px-5 py-2 text-orange-300 transition hover:bg-orange-500/20"
-            >
-              Fix Matka
-            </Link>
-          </div>
+          <p className="font-black underline text-1xl text-yellow-300">
+            FAST BOSS SIR
+          </p>
 
-          <div className="mt-10 rounded-[30px] border border-white/10 bg-[#0b1220] p-8 text-center">
-            <h3 className="text-2xl font-black text-emerald-300">
-              sattamatkadpbos.com
-            </h3>
+          <p className="text-cyan-400 font-black text-1xl mt-3 break-all">
+            1234567890
+          </p>
 
-            <p className="mt-4 text-lg font-black text-white">
-              ALL RIGHTS RESERVED (2012-2026)
-            </p>
-
-            <div className="mt-6 inline-flex rounded-full border border-yellow-500/20 bg-yellow-500/10 px-6 py-3">
-              <span className="font-black tracking-widest text-yellow-300">
-                FAST BOSS SIR
-              </span>
-            </div>
-
-            <p className="mt-6 text-xl font-black text-cyan-300">
-              1234567890
-            </p>
-
-            <p className="mt-4 text-slate-500">
-              https://sattamatkadpbos.com
-            </p>
-          </div>
+          <p className="font-bold text-base mt-4 text-slate-400 break-all">
+            https://sattamatkadpbos.com
+          </p>
         </div>
       </footer>
     </main>

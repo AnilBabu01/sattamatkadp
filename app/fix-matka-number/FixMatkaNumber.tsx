@@ -63,15 +63,15 @@ type ChartSectionProps = {
 
 function ChartSection({ title, data }: ChartSectionProps) {
   return (
-    <div className="mb-4 rounded-2xl overflow-hidden border border-cyan-500/40 bg-[#0f172a] shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+    <div className="mb-4 rounded-2xl overflow-hidden border-2 border-orange-500 shadow-[0_0_25px_rgba(249,115,22,0.5)]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 py-4 px-3">
+      <div className="bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 py-4 px-3">
         <h2 className="text-center text-lg md:text-xl italic font-black text-white">
           {title}
         </h2>
       </div>
 
-      {/* CONTENT NOT CHANGED */}
+      {/* Content */}
       <div className="bg-gradient-to-b from-zinc-950 via-neutral-900 to-black py-5">
         <div className="flex flex-col items-center gap-2">
           {data.map((item, index) => (
@@ -103,7 +103,8 @@ export default function FixMatkaNumber() {
   const weekRange = useMemo(() => {
     const today = new Date();
 
-    const currentDay = today.getDay();
+    // Monday Start
+    const currentDay = today.getDay(); // 0=Sun
     const diffToMonday = currentDay === 0 ? -6 : 1 - currentDay;
 
     const monday = new Date(today);
@@ -127,215 +128,193 @@ export default function FixMatkaNumber() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#020617] text-white overflow-hidden">
-      {/* BACKGROUND EFFECT */}
-      <div className="fixed inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500 blur-[180px]" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-500 blur-[180px]" />
-      </div>
+    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black text-white py-2 px-2">
+      <div className="max-w-[1600px] mx-auto border-2 border-orange-500 shadow-[0_0_30px_rgba(249,115,22,0.6)] overflow-hidden rounded-2xl">
+        {/* Header */}
+        <div className="border-b-4 border-orange-500 bg-gradient-to-r from-red-900 via-orange-800 to-yellow-700 text-center py-5 px-2">
+          <h1 className="text-yellow-200 text-3xl italic font-black tracking-wide animate-pulse">
+            FIX MATKA
+          </h1>
+        </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-2 py-3">
-        {/* HERO HEADER */}
-        <section className="rounded-3xl overflow-hidden border border-cyan-400/30 bg-[#0f172a]/90 backdrop-blur-xl shadow-[0_0_40px_rgba(6,182,212,0.2)]">
-          <div className="bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-600 py-8 px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-black tracking-widest text-white drop-shadow-lg">
-              FIX MATKA
-            </h1>
+        {/* Description */}
+        <div className="border-b-4 border-orange-500 bg-zinc-950 px-3 py-4 text-center">
+          <h1 className="text-orange-300 text-xl italic font-black tracking-wide">
+            Play Fix Matka With Us
+          </h1>
 
-            <p className="mt-3 text-sm md:text-base font-bold text-cyan-100">
-              LIVE SATTA MATKA • WEEKLY CHARTS • FAST RESULTS
-            </p>
+          <p className="text-[12px] italic leading-5 text-zinc-200 mt-2">
+            If You Are searching for fix matka number or fix satta game then
+            your search is over here.
+          </p>
+        </div>
+
+        {/* Lucky Number */}
+        <div className="border-y-4 border-orange-500 bg-gradient-to-r from-red-950 via-orange-950 to-yellow-950">
+          <div className="bg-black text-center border-b border-orange-500 py-2">
+            <h2 className="text-2xl italic font-black text-yellow-300">
+              Today Satta Matka Lucky Number
+            </h2>
           </div>
 
-          {/* INFO GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-[#0f172a]">
-            <div className="rounded-2xl border border-cyan-500/30 bg-[#111827] p-5 text-center">
-              <h2 className="text-cyan-300 text-lg font-black uppercase">
-                शुभ अंक
-              </h2>
+          <div className="grid grid-cols-2 text-center py-4 px-2 gap-4">
+            <div>
+              <h3 className="text-orange-300 text-xl italic font-black">
+                Ank (शुभांक)
+              </h3>
 
-              <p className="text-5xl mt-3 font-black text-white tracking-widest">
-                2-5-7-8
-              </p>
+              <p className="text-4xl font-black text-white mt-2">2-5-7-8</p>
             </div>
 
-            <div className="rounded-2xl border border-indigo-500/30 bg-[#111827] p-5 text-center">
-              <h2 className="text-indigo-300 text-lg font-black uppercase">
+            <div>
+              <h3 className="text-yellow-300 text-xl italic font-black">
                 Final Ank
-              </h2>
+              </h3>
 
-              <p className="text-4xl mt-4 font-black text-white">
-                K-5, M-*
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-emerald-500/30 bg-[#111827] p-5 text-center">
-              <h2 className="text-emerald-300 text-lg font-black uppercase">
-                Weekly Range
-              </h2>
-
-              <p className="text-sm md:text-base mt-4 font-black text-white leading-6">
-                {weekRange.startDate}
-                <br />
-                TO
-                <br />
-                {weekRange.endDate}
-              </p>
+              <p className="text-3xl font-black text-white mt-2">K-5, M-*</p>
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* LIVE UPDATE */}
-        <section className="mt-5 rounded-3xl overflow-hidden border border-cyan-500/30 bg-[#0f172a] shadow-[0_0_35px_rgba(6,182,212,0.15)]">
-          <div className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 py-4 px-4">
-            <div className="flex items-center justify-center gap-3">
-              <h2 className="text-2xl font-black tracking-wide text-white animate-pulse">
-                LIVE UPDATE
+        {/* Live Update */}
+        <div className="mt-3 border-2 border-orange-500 rounded-xl overflow-hidden">
+          <div className="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 py-2">
+            <div className="flex items-center justify-center gap-2">
+              <h2 className="text-xl italic font-black text-white animate-pulse">
+                📡 LIVE UPDATE
               </h2>
 
-              <Image src={download} alt="Live" width={38} height={38} />
+              <Image src={download} alt="Image" width={35} height={35} />
             </div>
-          </div>
 
-          <div className="p-3 grid grid-cols-1 md:grid-cols-2 gap-3">
-            {markets.map((market, index) => (
-              <div
-                key={index}
-                className="rounded-2xl border border-cyan-500/20 bg-[#111827] p-4 hover:scale-[1.02] transition-all duration-300"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <h2 className="text-cyan-300 text-sm md:text-lg font-black uppercase">
-                      {market.name}
-                    </h2>
+            <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border-[3px] border-[#b8870d] bg-[#edf2ef] shadow-md">
+              <div className="h-2 bg-[#f4b400]" />
 
-                    <p className="text-white text-xl md:text-2xl font-black mt-2">
-                      {market.result}
-                    </p>
-                  </div>
+              {markets.map((market, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-center gap-4 border-b border-gray-400 py-1 px-1 last:border-b-0"
+                >
+                  <h2 className="text-center text-[10px] font-black italic uppercase tracking-wide text-[#2a1a1a] md:text-[16px]">
+                    {market.name} {market.result}
+                  </h2>
 
-                  <button className="bg-gradient-to-r from-cyan-500 to-indigo-500 px-4 py-2 rounded-xl text-white font-black shadow-lg hover:scale-105 transition-all">
+                  <button className="rounded-full border border-[#d8c06c] bg-gradient-to-b from-[#3e0074] via-[#250047] to-[#120022] px-2 py-1 text-[10px] font-extrabold text-white">
                     Refresh
                   </button>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* PLAY RESULT */}
-        <section className="mt-5 rounded-3xl overflow-hidden border border-cyan-500/30 bg-[#0f172a]">
-          <div className="bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-600 py-4 text-center">
-            <h2 className="text-2xl font-black tracking-wider text-white">
-              SATTA MATKA PLAY RESULT
-            </h2>
-          </div>
-
-          <div className="p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {!isLoading &&
-              !isError &&
-              marketList?.slice(0, 30)?.map((item: any, index: number) => (
-                <div
-                  key={index}
-                  className={`rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 ${
-                    item?.bg_yellow_status == 1
-                      ? "bg-yellow-300 border-yellow-400"
-                      : "bg-[#111827] border-cyan-500/20"
-                  }`}
-                >
-                  <h3
-                    className={`text-xl font-black uppercase ${
-                      item?.bg_yellow_status == 1
-                        ? "text-black"
-                        : "text-cyan-300"
-                    }`}
-                  >
-                    {item.name}
-                  </h3>
-
-                  <p
-                    className={`text-3xl mt-3 font-black tracking-wide ${
-                      item?.bg_yellow_status == 1
-                        ? "text-black"
-                        : "text-white"
-                    }`}
-                  >
-                    {item.result}
-                  </p>
-
-                  <div
-                    className={`mt-4 text-sm font-bold ${
-                      item?.bg_yellow_status == 1
-                        ? "text-black"
-                        : "text-slate-300"
-                    }`}
-                  >
-                    {item.open_time} - {item.close_time}
-                  </div>
-                </div>
               ))}
+            </div>
           </div>
-        </section>
-
-        {/* CHARTS */}
-        <section className="mt-5">
-          <ChartSection
-            title={`Weekly Panel Or Patti Chart From ${weekRange.startDate} To ${weekRange.endDate}`}
-            data={panelChart}
-          />
-
-          <ChartSection
-            title={`Weekly Jodi Chart From ${weekRange.startDate} To ${weekRange.endDate}`}
-            data={jodiChart}
-          />
-
-          <ChartSection
-            title={`Weekly Number Open To Close From ${weekRange.startDate} To ${weekRange.endDate}`}
-            data={weeklyNumbers}
-          />
-        </section>
-
-        {/* JODI LINKS */}
-        <section className="mt-5 rounded-3xl overflow-hidden border border-cyan-500/30 bg-[#0f172a]">
-          <div className="bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-600 py-4 text-center">
-            <h2 className="text-2xl font-black text-white tracking-wider">
-              TARA MATKA PLAY JODI CHARTS
-            </h2>
-          </div>
-
-          <div className="p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {isLoading && (
-              <div className="text-center text-white py-5 col-span-full">
-                Loading...
-              </div>
-            )}
-
-            {!isLoading &&
-              !isError &&
-              marketList?.slice(0, 20)?.map((item: any, index: number) => (
-                <a
-                  key={index}
-                  href={`/jodi-chart/${item?.name
-                    ?.toLowerCase()
-                    .replace(/\s+/g, "-")}`}
-                  className="rounded-2xl border border-cyan-500/20 bg-[#111827] py-4 px-3 text-center text-cyan-300 text-lg font-black uppercase hover:bg-cyan-500 hover:text-white transition-all duration-300"
-                >
-                  {item?.name}
-                </a>
-              ))}
-          </div>
-        </section>
+        </div>
       </div>
 
-      {/* FLOATING BUTTONS */}
-      <div className="fixed bottom-4 left-3 z-50">
-        <button className="bg-gradient-to-r from-cyan-500 to-indigo-600 text-white px-5 py-3 rounded-2xl font-black shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-105 transition-all">
-          TARA MATKA PLAY
+      {/* Results */}
+      <section className="w-full mt-5 border-2 border-orange-500 rounded-xl overflow-hidden bg-zinc-950">
+        <div className="bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 py-3 text-center">
+          <h2 className="text-white text-xl italic font-black uppercase">
+            SATTA MATKA PLAY RESULT
+          </h2>
+        </div>
+
+        <div>
+          {!isLoading &&
+            !isError &&
+            marketList?.slice(0, 30)?.map((item: any, index: number) => (
+              <div
+                key={index}
+                className={`border-b text-center py-4 ${
+                  item?.bg_yellow_status == 1
+                    ? "bg-yellow-300 border-yellow-500"
+                    : "border-slate-700 bg-black"
+                }`}
+              >
+                <h3
+                  className={`text-xl italic font-black ${
+                    item?.bg_yellow_status == 1
+                      ? "text-black"
+                      : "text-yellow-300"
+                  }`}
+                >
+                  {item.name}
+                </h3>
+
+                <p
+                  className={`text-xl font-black ${
+                    item?.bg_yellow_status == 1
+                      ? "text-black"
+                      : "text-white"
+                  }`}
+                >
+                  {item.result}
+                </p>
+
+                <p
+                  className={`italic font-black ${
+                    item?.bg_yellow_status == 1
+                      ? "text-black"
+                      : "text-orange-300"
+                  }`}
+                >
+                  {item.open_time} - {item.close_time}
+                </p>
+              </div>
+            ))}
+        </div>
+      </section>
+
+      {/* Charts */}
+      <section className="w-full mt-5">
+        <ChartSection
+          title={`Weekly Panel Or Patti Chart From ${weekRange.startDate} To ${weekRange.endDate}`}
+          data={panelChart}
+        />
+
+        <ChartSection
+          title={`Weekly Jodi Chart From ${weekRange.startDate} To ${weekRange.endDate}`}
+          data={jodiChart}
+        />
+
+        <ChartSection
+          title={`Weekly Number Open To Close From ${weekRange.startDate} To ${weekRange.endDate}`}
+          data={weeklyNumbers}
+        />
+      </section>
+
+      {/* Chart Links */}
+      <div className="mt-4 bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 text-white text-center font-black italic text-lg px-3 py-3 rounded-t-xl">
+        TARA MATKA Play Jodi Charts
+      </div>
+
+      <section className="bg-zinc-950 rounded-b-xl overflow-hidden border-2 border-orange-500">
+        {isLoading && (
+          <div className="text-center text-white py-5">Loading...</div>
+        )}
+
+        {!isLoading &&
+          !isError &&
+          marketList?.slice(0, 20)?.map((item: any, index: number) => (
+            <a
+              key={index}
+              href={`/jodi-chart/${item?.name
+                ?.toLowerCase()
+                .replace(/\s+/g, "-")}`}
+              className="block text-center py-4 text-xl font-black text-yellow-300 border-b border-zinc-800 hover:bg-orange-900 transition-all duration-300"
+            >
+              {item?.name}
+            </a>
+          ))}
+      </section>
+
+      {/* Fixed Buttons */}
+      <div className="fixed bottom-3 left-2 z-50">
+        <button className="bg-gradient-to-r from-red-600 to-orange-500 hover:scale-105 transition text-white px-4 py-2 rounded-xl font-black italic shadow-lg border border-white">
+          TARA MATKA Play
         </button>
       </div>
 
-      <div className="fixed bottom-4 right-3 z-50">
-        <button className="bg-white text-black px-5 py-3 rounded-2xl font-black border-2 border-cyan-400 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-105 transition-all">
+      <div className="fixed bottom-3 right-2 z-50">
+        <button className="bg-yellow-400 border-4 border-orange-500 text-black px-5 py-2 rounded-2xl font-black italic shadow-lg hover:scale-105 transition">
           Refresh
         </button>
       </div>
