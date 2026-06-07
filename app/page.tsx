@@ -69,14 +69,14 @@ export default function Home() {
           </h1>
 
           <h2 className="text-pink-400 text-2xl italic font-bold mt-1">
-            sattamatkadpbos
+            sattamatkadp 
           </h2>
         </div>
 
         {/* Description */}
         <div className="border-b-4 border-cyan-500 bg-slate-900 px-3 py-4 text-center">
           <p className="text-[12px] italic leading-5 text-slate-200">
-            sattamatkadpbos is India's fastest and most trusted platform for
+            sattamatkadp  is India's fastest and most trusted platform for
             DPBoss Satta Matka result — Kalyan Matka, Milan Day Night, Rajdhani
             Day Night, Main Bazar, Time Bazar and 50+ markets — all updated
             daily at lightning speed, 100% free. Get live Kalyan Matka result,
@@ -383,7 +383,7 @@ export default function Home() {
           <div className="bg-slate-900 flex justify-center py-5">
             <div className="bg-gradient-to-r from-cyan-500 to-pink-500 px-5 py-3 rounded-full shadow-xl">
               <p className="text-black text-xl font-black italic">
-                support.sattamatkadpbos@gmail.com
+                support.sattamatkadp@gmail.com
               </p>
             </div>
           </div>
@@ -588,7 +588,7 @@ export default function Home() {
           </h3>
 
           <p className="text-slate-300 leading-7">
-            यह वेबसाइट (sattamatkadpbos) केवल मनोरंजन और सूचना के उद्देश्य के
+            यह वेबसाइट (sattamatkadp ) केवल मनोरंजन और सूचना के उद्देश्य के
             लिए है। हम किसी भी अवैध सट्टा मटका व्यवसाय से नहीं जुड़े हैं। यहाँ
             दिखाए गए सभी परिणाम इंटरनेट पर उपलब्ध डेटा पर आधारित हैं। हम जुए या
             सट्टा खेलने का समर्थन नहीं करते हैं। कृपया अपने देश के कानूनों का
@@ -667,7 +667,7 @@ export default function Home() {
         <div className="flex justify-center mt-10 mb-10">
           <div className="bg-slate-900 border border-cyan-500 rounded-3xl shadow-lg w-full max-w-md text-center p-8">
             <h3 className="text-cyan-300 text-2xl font-black italic">
-              sattamatkadpbos
+              sattamatkadp 
             </h3>
 
             <p className="text-slate-300 mt-4 font-semibold">
