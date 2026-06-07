@@ -231,7 +231,20 @@ export default function TaraMatkaChart() {
         <div>
           {!isLoading &&
             !isError &&
-            marketList?.slice(0,30)?.map((item: any, index: number) => (
+            marketList?.filter((item: any) =>
+                [
+                  "SRIDEVI",
+                  "TIME BAZAR",
+                  "MILAN DAY",
+                  "RAJDHANI DAY",
+                  "KALYAN",
+                  "SRIDEVI NIGHT",
+                  "MILAN NIGHT",
+                  "RAJDHANI NIGHT",
+                  "KALYAN NIGHT",
+                  "MAIN BAZAR",
+                ].includes(item?.name),
+              )?.map((item: any, index: number) => (
               <div
                 key={index}
                 className={`border-b border-zinc-700 text-center py-4 ${

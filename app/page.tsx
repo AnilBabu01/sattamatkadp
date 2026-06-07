@@ -69,20 +69,20 @@ export default function Home() {
           </h1>
 
           <h2 className="text-pink-400 text-2xl italic font-bold mt-1">
-            sattamatkadp 
+            sattamatkadp
           </h2>
         </div>
 
         {/* Description */}
         <div className="border-b-4 border-cyan-500 bg-slate-900 px-3 py-4 text-center">
           <p className="text-[12px] italic leading-5 text-slate-200">
-            sattamatkadp  is India's fastest and most trusted platform for
-            DPBoss Satta Matka result — Kalyan Matka, Milan Day Night, Rajdhani
-            Day Night, Main Bazar, Time Bazar and 50+ markets — all updated
-            daily at lightning speed, 100% free. Get live Kalyan Matka result,
-            DPBoss 143 guessing, free Matka Guessing Forum, complete Jodi Chart
-            and Panel Chart records from 1974 to 2026, Morning Syndicate result,
-            Syndicate Night result, Date Fix Matka and weekly jodi predictions —
+            sattamatkadp is India's fastest and most trusted platform for DPBoss
+            Satta Matka result — Kalyan Matka, Milan Day Night, Rajdhani Day
+            Night, Main Bazar, Time Bazar and 50+ markets — all updated daily at
+            lightning speed, 100% free. Get live Kalyan Matka result, DPBoss 143
+            guessing, free Matka Guessing Forum, complete Jodi Chart and Panel
+            Chart records from 1974 to 2026, Morning Syndicate result, Syndicate
+            Night result, Date Fix Matka and weekly jodi predictions —
             everything in one place. No login. No payment. Always free. India's
             most complete Satta Matka platform — 50+ markets, 68+ chart records,
             active guessing forum and expert fix jodi tips. We also provide
@@ -161,6 +161,20 @@ export default function Home() {
             {!isLoading &&
               !isError &&
               marketList
+                ?.filter((item: any) =>
+                  [
+                    "SRIDEVI",
+                    "TIME BAZAR",
+                    "MILAN DAY",
+                    "RAJDHANI DAY",
+                    "KALYAN",
+                    "SRIDEVI NIGHT",
+                    "MILAN NIGHT",
+                    "RAJDHANI NIGHT",
+                    "KALYAN NIGHT",
+                    "MAIN BAZAR",
+                  ].includes(item?.name),
+                )
                 ?.filter((item: any) => {
                   if (item.result === "Loading...") {
                     return false;
@@ -303,67 +317,82 @@ export default function Home() {
           {/* MARKET LIST */}
           {!isLoading &&
             !isError &&
-            marketList?.map((item: any, index: number) => (
-              <div
-                key={index}
-                className={`border-b relative py-5 px-2 ${
-                  item?.bg_yellow_status == 1
-                    ? "bg-yellow-300 border-yellow-500"
-                    : "border-slate-700"
-                }`}
-              >
-                {/* LEFT BUTTON */}
-                <Link
-                  href={`/jodi-chart/${item?.name
-                    ?.toLowerCase()
-                    ?.replace(/\s+/g, "-")}`}
-                >
-                  <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                    Jodi
-                  </button>
-                </Link>
-
-                {/* CENTER */}
+            marketList
+              ?.filter((item: any) =>
+                [
+                  "SRIDEVI",
+                  "TIME BAZAR",
+                  "MILAN DAY",
+                  "RAJDHANI DAY",
+                  "KALYAN",
+                  "SRIDEVI NIGHT",
+                  "MILAN NIGHT",
+                  "RAJDHANI NIGHT",
+                  "KALYAN NIGHT",
+                  "MAIN BAZAR",
+                ].includes(item?.name),
+              )
+              ?.map((item: any, index: number) => (
                 <div
-                  className={`text-center ${
-                    item?.bg_yellow_status == 1 ? "text-black" : "text-white"
+                  key={index}
+                  className={`border-b relative py-5 px-2 ${
+                    item?.bg_yellow_status == 1
+                      ? "bg-yellow-300 border-yellow-500"
+                      : "border-slate-700"
                   }`}
                 >
-                  <h3
-                    className={`text-2xl font-black italic uppercase ${
-                      item?.bg_yellow_status == 1
-                        ? "text-black"
-                        : "text-pink-400"
+                  {/* LEFT BUTTON */}
+                  <Link
+                    href={`/jodi-chart/${item?.name
+                      ?.toLowerCase()
+                      ?.replace(/\s+/g, "-")}`}
+                  >
+                    <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
+                      Jodi
+                    </button>
+                  </Link>
+
+                  {/* CENTER */}
+                  <div
+                    className={`text-center ${
+                      item?.bg_yellow_status == 1 ? "text-black" : "text-white"
                     }`}
                   >
-                    {item?.name}
-                  </h3>
+                    <h3
+                      className={`text-2xl font-black italic uppercase ${
+                        item?.bg_yellow_status == 1
+                          ? "text-black"
+                          : "text-pink-400"
+                      }`}
+                    >
+                      {item?.name}
+                    </h3>
 
-                  <p className="text-3xl font-black mt-1">{item?.result}</p>
+                    <p className="text-3xl font-black mt-1">{item?.result}</p>
 
-                  <p
-                    className={`text-lg font-bold italic mt-1 ${
-                      item?.bg_yellow_status == 1
-                        ? "text-black"
-                        : "text-cyan-300"
-                    }`}
+                    <p
+                      className={`text-lg font-bold italic mt-1 ${
+                        item?.bg_yellow_status == 1
+                          ? "text-black"
+                          : "text-cyan-300"
+                      }`}
+                    >
+                      Open {item?.open_time} - Close {item?.close_time}
+                    </p>
+                  </div>
+
+                  {/* RIGHT BUTTON */}
+                  <Link
+                    href={`/panel-chart/${item?.name
+                      ?.toLowerCase()
+                      ?.replace(/\s+/g, "-")}`}
                   >
-                    Open {item?.open_time} - Close {item?.close_time}
-                  </p>
+                    <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 text-white text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
+                      Panel
+                    </button>
+                  </Link>
                 </div>
-
-                {/* RIGHT BUTTON */}
-                <Link
-                  href={`/panel-chart/${item?.name
-                    ?.toLowerCase()
-                    ?.replace(/\s+/g, "-")}`}
-                >
-                  <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 text-white text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                    Panel
-                  </button>
-                </Link>
-              </div>
-            ))}
+              ))}
         </div>
 
         {/* Support Section */}
@@ -439,93 +468,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Open Close Zone */}
-      <div className="mt-4 border-2 border-cyan-500 rounded-xl overflow-hidden">
-        <div className="bg-gradient-to-r from-cyan-700 to-blue-900 text-white font-black italic text-lg px-3 py-2">
-          ⇒ OPEN TO CLOSE FREE GAME ZONE
-        </div>
-
-        <div className="bg-pink-500 text-center text-xl italic font-black py-3 border-b-4 border-cyan-500 text-white">
-          Date : {currentDate}
-        </div>
-
-        <div className="bg-slate-900">
-          {chartData.map((item, index) => (
-            <div
-              key={index}
-              className="border-b-2 border-cyan-500 py-5 text-center"
-            >
-              <div className="bg-gradient-to-r from-cyan-500 to-blue-700 inline-block px-4 py-2 text-white text-xl italic font-black rounded-lg shadow-lg">
-                {item.title}
-              </div>
-
-              {item.subtitle && (
-                <>
-                  <h2 className="text-cyan-300 text-2xl font-black italic mt-2">
-                    {item.subtitle}
-                  </h2>
-
-                  <h3 className="text-white text-xl font-bold italic">
-                    CALL KARE
-                  </h3>
-
-                  <p className="text-pink-400 text-2xl font-black italic">
-                    {item.phone}
-                  </p>
-                </>
-              )}
-
-              {item.number && (
-                <>
-                  <h2 className="text-cyan-300 text-4xl font-black italic mt-2">
-                    {item.number}
-                  </h2>
-
-                  <p className="text-pink-400 text-2xl font-black italic px-2 mt-2">
-                    {item.result}
-                  </p>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* LEFT */}
-          <div className="border-r border-cyan-500">
-            <div className="bg-cyan-700 text-white text-xl font-black italic px-3 py-2">
-              TOP GUSSER
-            </div>
-
-            {topGuessers.map((item, index) => (
-              <div
-                key={index}
-                className="bg-slate-900 text-cyan-300 text-lg font-bold italic border-b border-slate-700 px-3 py-2"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-
-          {/* RIGHT */}
-          <div>
-            <div className="bg-pink-600 text-white text-xl font-black italic px-3 py-2">
-              FAST RESULT
-            </div>
-
-            {fastResult.map((item, index) => (
-              <div
-                key={index}
-                className="bg-slate-900 text-pink-300 text-lg font-bold italic border-b border-slate-700 px-3 py-2"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
+   
       {/* Chart Records */}
       <div className="mt-4 bg-gradient-to-r from-cyan-700 to-blue-900 text-white font-black italic text-lg px-3 py-2 rounded-t-xl">
         ⇒ SATTA MATKA JODI CHART RECORDS
@@ -534,7 +477,20 @@ export default function Home() {
       <section className="bg-slate-900 rounded-b-xl overflow-hidden border border-cyan-500">
         {!isLoading &&
           !isError &&
-          marketList?.slice(0, 10)?.map((item: any, index: number) => (
+          marketList ?.filter((item: any) =>
+                [
+                  "SRIDEVI",
+                  "TIME BAZAR",
+                  "MILAN DAY",
+                  "RAJDHANI DAY",
+                  "KALYAN",
+                  "SRIDEVI NIGHT",
+                  "MILAN NIGHT",
+                  "RAJDHANI NIGHT",
+                  "KALYAN NIGHT",
+                  "MAIN BAZAR",
+                ].includes(item?.name),
+              )?.map((item: any, index: number) => (
             <a
               key={index}
               href={`/jodi-chart/${item?.name.toLowerCase().replace(/\s+/g, "-")}`}
@@ -588,11 +544,11 @@ export default function Home() {
           </h3>
 
           <p className="text-slate-300 leading-7">
-            यह वेबसाइट (sattamatkadp ) केवल मनोरंजन और सूचना के उद्देश्य के
-            लिए है। हम किसी भी अवैध सट्टा मटका व्यवसाय से नहीं जुड़े हैं। यहाँ
-            दिखाए गए सभी परिणाम इंटरनेट पर उपलब्ध डेटा पर आधारित हैं। हम जुए या
-            सट्टा खेलने का समर्थन नहीं करते हैं। कृपया अपने देश के कानूनों का
-            पालन करें। किसी भी लाभ या हानि के लिए आप स्वयं जिम्मेदार होंगे।
+            यह वेबसाइट (sattamatkadp ) केवल मनोरंजन और सूचना के उद्देश्य के लिए
+            है। हम किसी भी अवैध सट्टा मटका व्यवसाय से नहीं जुड़े हैं। यहाँ दिखाए
+            गए सभी परिणाम इंटरनेट पर उपलब्ध डेटा पर आधारित हैं। हम जुए या सट्टा
+            खेलने का समर्थन नहीं करते हैं। कृपया अपने देश के कानूनों का पालन
+            करें। किसी भी लाभ या हानि के लिए आप स्वयं जिम्मेदार होंगे।
           </p>
 
           <p className="text-slate-300 leading-7">
@@ -667,7 +623,7 @@ export default function Home() {
         <div className="flex justify-center mt-10 mb-10">
           <div className="bg-slate-900 border border-cyan-500 rounded-3xl shadow-lg w-full max-w-md text-center p-8">
             <h3 className="text-cyan-300 text-2xl font-black italic">
-              sattamatkadp 
+              sattamatkadp
             </h3>
 
             <p className="text-slate-300 mt-4 font-semibold">

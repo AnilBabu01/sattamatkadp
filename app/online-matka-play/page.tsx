@@ -118,19 +118,35 @@ const weeklyNumbers = [
 
 const markets = [
   {
-    name: "KHAJANA",
+    name: "SRIDEVI",
     result: "470-1",
   },
   {
-    name: "SUPREME DAY",
+    name: "TIME BAZAR",
     result: "180-98-189",
   },
   {
-    name: "MORNING SYNDICATE",
+    name: "MILAN DAY",
     result: "258-50-226",
   },
   {
-    name: "MAHARASHTRA NIGHT",
+    name: "KALYAN",
+    result: "***-**-***",
+  },
+  {
+    name: "SRIDEVI NIGHT",
+    result: "***-**-***",
+  },
+  {
+    name: "MILAN NIGHT",
+    result: "***-**-***",
+  },
+  {
+    name: "KALYAN NIGHT",
+    result: "***-**-***",
+  },
+  {
+    name: "MAIN BAZAR",
     result: "***-**-***",
   },
 ];
@@ -235,22 +251,22 @@ export default function Home() {
 
               <Image src={download} alt="Image" width={35} height={35} />
             </div>
-             {markets.map((market, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-center gap-4 border-b border-gray-400 py-1 px-1 last:border-b-0"
-                >
-                  {/* Market Name */}
-                  <h2 className="text-center text-[10px] font-black italic uppercase tracking-wide text-[#2a1a1a] md:text-[16px]">
-                    {market.name} {market.result}
-                  </h2>
+            {markets.map((market, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-center gap-4 border-b border-gray-400 py-1 px-1 last:border-b-0"
+              >
+                {/* Market Name */}
+                <h2 className="text-center text-[10px] font-black italic uppercase tracking-wide text-[#2a1a1a] md:text-[16px]">
+                  {market.name} {market.result}
+                </h2>
 
-                  {/* Refresh Button */}
-                  <button className="rounded-full border border-[#d8c06c] bg-gradient-to-b from-[#3e0074] via-[#250047] to-[#120022] px-2 py-1 text-[10px] font-extrabold text-white shadow-[0_0_15px_rgba(255,215,0,0.7)] transition-all hover:scale-105 ">
-                    Refresh
-                  </button>
-                </div>
-              ))}
+                {/* Refresh Button */}
+                <button className="rounded-full border border-[#d8c06c] bg-gradient-to-b from-[#3e0074] via-[#250047] to-[#120022] px-2 py-1 text-[10px] font-extrabold text-white shadow-[0_0_15px_rgba(255,215,0,0.7)] transition-all hover:scale-105 ">
+                  Refresh
+                </button>
+              </div>
+            ))}
           </div>
 
           <div className="max-w-7xl mx-auto p-2 bg-zinc-950">

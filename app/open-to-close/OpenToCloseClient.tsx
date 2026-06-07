@@ -91,7 +91,20 @@ export default function OpenToCloseClient() {
 
           {!isLoading &&
             !isError &&
-            marketList?.slice(0, 20)?.map((market: any, index: number) => (
+            marketList?.filter((item: any) =>
+                [
+                  "SRIDEVI",
+                  "TIME BAZAR",
+                  "MILAN DAY",
+                  "RAJDHANI DAY",
+                  "KALYAN",
+                  "SRIDEVI NIGHT",
+                  "MILAN NIGHT",
+                  "RAJDHANI NIGHT",
+                  "KALYAN NIGHT",
+                  "MAIN BAZAR",
+                ].includes(item?.name),
+              )?.map((market: any, index: number) => (
               <div
                 key={index}
                 className="rounded-xl border border-cyan-500 bg-gradient-to-r from-slate-900 to-slate-800 text-center py-4 px-3 shadow-md hover:scale-[1.01] transition-all duration-300"
